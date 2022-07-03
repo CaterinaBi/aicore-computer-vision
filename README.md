@@ -1,1 +1,1 @@
-# Computer-Vision-Rock-Paper-Scissors
+# Computer Vision (AiCore training): Rock, Paper, Scissors!
