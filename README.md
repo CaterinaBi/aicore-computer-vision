@@ -85,6 +85,7 @@ Once the dataset was ready, the images were uploaded to the Teachable Machine we
 
 A first model trained on less than 300 images turned out to be very deceiving, and almost completely unable to distinguish both 'Rock' and 'Paper' gestures. A second dataset was thus created, which included a total of 1007 images. The model now performes in a satisfactory way; images from the testing phase are prodided below:
 
-
+![This image shows tests performed to check the model's output](images/test_1.png)
+![This image shows tests performed to check the model's output](images/test_2.png)
 
 ## Biases and limitations
