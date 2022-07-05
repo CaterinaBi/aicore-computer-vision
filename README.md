@@ -45,6 +45,10 @@ The creation of the dataset is followed by the training and creation of the mode
 
 ## Creation of the dataset
 
+The project required that the pictures used to train the model were half-bust shots of only one person, myself in this case. The creation of the pictures was done so as to limit overfitting, a common concern of all machine learning projects. 
+
+While overfitting cannot be completely avoided in a model trained on images of only one person, i.e., the model is likely to perform poorly with users different from the one in the training images, it is possible to limit situations in which the model overfits because of a simple change of setting or outfit by varying the input images as much as possible.
+
 ## Output accuracy
 
 ## Biases and limitations
