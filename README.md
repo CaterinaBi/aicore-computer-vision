@@ -43,7 +43,7 @@ None is the lack of any gesture, while the first three gestures are those common
 
 Four representative pictures taken from the training images are provided below.
 
-<p align="center">
+<p>
 <img src="images/gestures_demo.png" alt="These are four images of the four different gestures taken from the training set" />
 </p>
 
