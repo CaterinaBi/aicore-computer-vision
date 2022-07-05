@@ -72,6 +72,10 @@ Once the dataset was ready, the images were uploaded to the Teachable Machine we
 
 ## Output accuracy
 
-A first model trained on less than 400 images turned out to be very deceiving, and almost completely unable to distinguish both 'Rock' and 'Paper' gestures. A second dataset was thus created, which included a total of 1007 images.
+A first model trained on less than 300 images turned out to be very deceiving, and almost completely unable to distinguish both 'Rock' and 'Paper' gestures. A second dataset was thus created, which included a total of 1007 images.
+
+<p align="center">
+<img src="images/video.mov" alt="This is a video of me testing the model's accuracy on the TM website" />
+</p>
 
 ## Biases and limitations
