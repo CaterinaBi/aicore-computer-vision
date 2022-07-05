@@ -47,11 +47,7 @@ Four representative pictures taken from the training images are provided below.
 <img src="images/gestures_demo.png" alt="These are four images of the four different gestures taken from the training set" />
 </p>
 
-The creation of the dataset is followed by the training and creation of the model. These are done on [Teachable Machine](https://teachablemachine.withgoogle.com/), as I discuss in what follows. A representative image from the Teachable Machine portal is provided below.
-
-<p>
-<img src="images/teachable_machine.png" alt="This is a picture of the Teachable Machine portal" />
-</p>
+The creation of the dataset is followed by the training and creation of the model. These are done on [Teachable Machine](https://teachablemachine.withgoogle.com/), as I discuss in what follows.
 
 ## Creation of the dataset
 
