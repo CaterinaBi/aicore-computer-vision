@@ -44,7 +44,7 @@ None is the lack of any gesture, while the first three gestures are those common
 Four representative pictures taken from the training images are provided below.
 
 <p align="center">
-<img src="images/.png" alt="These are four images of the four different gestures taken from the training set" />
+<img src="images/gestures_demo.png" alt="These are four images of the four different gestures taken from the training set" />
 </p>
 
 The creation of the dataset is followed by the training and creation of the model. These are done on [Teachable Machine](https://teachablemachine.withgoogle.com/), as I discuss in what follows.
