@@ -63,7 +63,7 @@ To do so, the created images varied along the following axes (representative pic
 - facial expression (resting vs. smiling face)
 
 ![This is an image of different facial expressions from the dataset](images/expressions.png)
-- hand (right vs. left)
+- hand (right vs. left, note that the camera inverses the images)
 
 ![This is an image of different hands from the dataset](images/hands.png)
 - setting (for a total of 5)
