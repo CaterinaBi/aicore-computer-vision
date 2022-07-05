@@ -64,7 +64,7 @@ To do so, the created images varied along the following axes (representative pic
 - outfit (for a total of 6)
 - locus where the gesture is realised (all over the screen, both over the person's body and on the side).
 
-Once the dataset was ready, the images were uploaded to the Teachable Machine website. Using Teachable Machine is quite straightforward: classes are created on the left colums, the images are easily (and rapidly!) uploaded in the right class folder from the local machine or a cloud, the training is launched by clicking on a button in the middle colum, and then the output can be tested on the right colum. All this can be seen in the screenshot below:
+Once the dataset was ready, the images were uploaded to the Teachable Machine website. Using Teachable Machine is quite straightforward: classes are created on the left colums, the images are easily (and rapidly!) uploaded in the right class folder from the local machine or a cloud, the training is launched by clicking on a button in the middle colum, and then the output can be tested on the right colum. All these can be seen in the screenshot below:
 
 <p align="center">
 <img src="images/output_none.png" alt="This is an image taken from the Teachable Machine website" />
