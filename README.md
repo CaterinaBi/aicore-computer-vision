@@ -47,8 +47,12 @@ The creation of the dataset is followed by the training and creation of the mode
 
 The project required that the pictures used to train the model were half-bust shots of only one person, myself in this case. The creation of the pictures was done so as to limit overfitting, a common concern of all machine learning projects. 
 
-While overfitting cannot be completely avoided in a model trained on images of only one person, i.e., the model is likely to perform poorly with users different from the one in the training images, it is possible to limit situations in which the model overfits because of a simple change of setting or outfit by varying the input images as much as possible.
+While overfitting cannot be completely avoided in a model trained on images of only one person (the model is likely to perform poorly with users different from the one in the training images), it is possible to limit situations in which the model overfits because of a simple change of setting or outfit by varying the input images as much as possible.
+
+To do so, the 
 
 ## Output accuracy
+
+A first model trained on less than 400 images turned out to be very deceiving, and almost completely unable to distinguish both 'Rock' and 'Paper' gestures. A second dataset was thus created, which included a total of 1007 images.
 
 ## Biases and limitations
