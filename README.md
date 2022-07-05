@@ -57,9 +57,10 @@ While overfitting cannot be completely avoided in a model trained on images of o
 
 To do so, the created images varied along the following axes (representative pictures are provided for reference):
 
-- hair do (hair up/hair down)
+- hair do (hair up, hair down, headphones)
+- accessories (headphones vs. nothing)
 - facial expression (resting vs. smiling face)
-- hand (right vs left)
+- hand (right vs. left)
 - setting (for a total of 5)
 - outfit (for a total of 6)
 - locus where the gesture is realised (all over the screen, both over the person's body and on the side).
