@@ -1,5 +1,9 @@
 # Computer Vision (AiCore training): Rock, Paper, Scissors!
 
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-no-red.svg)](https://bitbucket.org/lbesson/ansi-colors)
+
 Computer vision project that I am working on as part of my 'AI and Data Engineering' training at AiCore.
 
 ![This is an image taken from the AiCore portal](images/portal_png.png)
