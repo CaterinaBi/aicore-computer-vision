@@ -41,6 +41,8 @@ None is the lack of any gesture, while the first three gestures are those common
 <img src="images/gestures.png" alt="This is an image of the gestures commonly used in the game of Rock, Paper, Scissors" />
 </p>
 
+The creation of the dataset is followed by the training and creation of the model. These are done on [Teachable Machine](https://teachablemachine.withgoogle.com/), as I discuss in what follows.
+
 ## Creation of the dataset
 
 ## Output accuracy
