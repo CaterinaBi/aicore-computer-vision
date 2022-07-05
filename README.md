@@ -4,7 +4,7 @@
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-no-red.svg)](https://bitbucket.org/lbesson/ansi-colors)
 
-Computer vision project that I am working on as part of my 'AI and Data Engineering' training at AiCore.
+Computer vision project that I am working on as part of my 'AI and Data Engineering' training at [AiCore](https://www.theaicore.com/).
 
 ![This is an image taken from the AiCore portal](images/portal_png.png)
 
