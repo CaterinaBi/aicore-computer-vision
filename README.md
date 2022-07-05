@@ -8,6 +8,13 @@ Computer vision project that I am working on as part of my 'AI and Data Engineer
 
 # Project structure
 
+The project comprises of four milestones organised as follows:
+
+1 - MILESTONE 1
+2 - MILESTONE 2
+3 - MILESTONE 3
+4 - MILESTONE 4
+
 # Creation of the model
 
 ## Creation of the dataset
