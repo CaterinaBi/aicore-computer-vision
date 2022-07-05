@@ -41,6 +41,12 @@ None is the lack of any gesture, while the first three gestures are those common
 <img src="images/gestures.png" alt="This is an image of the gestures commonly used in the game of Rock, Paper, Scissors" />
 </p>
 
+Four representative pictures taken from the training images are provided below.
+
+<p align="center">
+<img src="images/.png" alt="These are four images of the four different gestures taken from the training set" />
+</p>
+
 The creation of the dataset is followed by the training and creation of the model. These are done on [Teachable Machine](https://teachablemachine.withgoogle.com/), as I discuss in what follows.
 
 ## Creation of the dataset
@@ -49,7 +55,14 @@ The project required that the pictures used to train the model were half-bust sh
 
 While overfitting cannot be completely avoided in a model trained on images of only one person (the model is likely to perform poorly with users different from the one in the training images), it is possible to limit situations in which the model overfits because of a simple change of setting or outfit by varying the input images as much as possible.
 
-To do so, the 
+To do so, the created images varied along the following axes (representative pictures are provided for reference):
+
+- hair do (hair up/hair down)
+- facial expression (resting vs. smiling face)
+- hand (right vs left)
+- setting (for a total of 5)
+- outfit (for a total of 6)
+- locus where the gesture is realised (all over the screen, both over the person's body and on the side).
 
 ## Output accuracy
 
