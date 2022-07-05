@@ -58,15 +58,21 @@ While overfitting cannot be completely avoided in a model trained on images of o
 To do so, the created images varied along the following axes (representative pictures are provided for reference):
 
 - hair do (hair up, hair down, headphones)
+
 ![This is an image of different hair styles from the dataset](images/hair.png)
 - facial expression (resting vs. smiling face)
+
 ![This is an image of different facial expressions from the dataset](images/expressions.png)
 - hand (right vs. left)
+
 ![This is an image of different hands from the dataset](images/hands.png)
 - setting (for a total of 5)
+
 ![This is an image of different settings from the dataset](images/settings.png)
 - outfit (for a total of 6)
+
 ![This is an image of different outfits from the dataset](images/outfits.png)
+
 - locus where the gesture is realised (all over the screen, both over the person's body and on the side).
 
 Once the dataset was ready, the images were uploaded to the Teachable Machine website. Using Teachable Machine is quite straightforward: classes are created on the left colums, the images are easily (and rapidly!) uploaded in the right class folder from the local machine or a cloud, the training is launched by clicking on a button in the middle colum, and then the output can be tested on the right colum. All these can be seen in the screenshot below:
