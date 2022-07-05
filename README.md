@@ -33,6 +33,14 @@ The project comprises of four milestones organised as follows:
 
 # Creation of the model
 
+The creation of this computer vision application requires setting up a dataset to be used to train a model that recognises four different hand gestures: 1: Rock; 2- Paper; 3- Scissors; 4- None.
+
+None is the lack of any gesture, while the first three gestures are those commonly used during the game of 'Rock, Paper, Scissors'. These are as in the image below.
+
+<p align="center">
+<img src="images/gestures.png" alt="This is an image of the gestures commonly used in the game of Rock, Paper, Scissors" />
+</p>
+
 ## Creation of the dataset
 
 ## Output accuracy
