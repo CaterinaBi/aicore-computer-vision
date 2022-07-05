@@ -81,6 +81,8 @@ Once the dataset was ready, the images were uploaded to the Teachable Machine we
 <img src="images/output_none.png" alt="This is an image taken from the Teachable Machine website" />
 </p>
 
+At the end of the training, the model can be exported using the 'export model' button on the upper right of the webpage. This creates two files, `keras_model.h5` (the model itself) and `labels.txt` (the file containing the labels). These files contain the structure and the parameters of our deep learning model, but they are not files that can be run, and do not contain anything readable. Nonetheless, they will be central to our the computer vision programme.
+
 ## Output accuracy
 
 A first model trained on less than 300 images turned out to be very deceiving, and almost completely unable to distinguish both 'Rock' and 'Paper' gestures. A second dataset was thus created, which included a total of 1007 images. The model now performes in a satisfactory way; images from the testing phase are prodided below:
@@ -88,3 +90,5 @@ A first model trained on less than 300 images turned out to be very deceiving, a
 ![This image shows tests performed to check the model's output](images/tests.png)
 
 ## Biases and limitations
+
+The dataset was created as such that its performance in only guarantee if I am the user: the output will likely be unsatisfactory if people of other genders, ethnicities, or with special outfits and accessories use the model in a computer vision application. Despite these, I would nonetheless recommend the metodology outlined above for the creation of small datasets for machine learning models to those who are interested in engaging in small-scale learning projects.
