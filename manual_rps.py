@@ -39,3 +39,8 @@ class Game:
         winner = user
         print(f"The computer chose {computer_choice}. The user wins this match!")
    return winner
+
+if __name__ == '__main__':
+    gesture_list = ["Rock", "Paper", "Scissors"]
+    play_game(gesture_list)
+# %%
