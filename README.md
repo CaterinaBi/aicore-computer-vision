@@ -14,7 +14,7 @@ Rock-Paper-Scissors is a game in which each player simultaneously shows one of t
 
 # Learning objectives
 
-The project's main learning objectives of this project were the creation of a (small) image database for computer vision tasks, the set up of virtual environments and the installation of all required packages, and the practice of Python programming - especially 'if-else' statement, 'while' loops, and object oriented programming.
+The project's main learning objectives were the creation of a (small) image database for computer vision tasks, the set up of virtual environments and the installation of all required packages, and the practice of Python programming - especially 'if-else' statement, 'while' loops, and object oriented programming.
 
 # Languages and tools
 <p align="left"> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> <a href="https://www.tensorflow.org" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/tensorflow/tensorflow-icon.svg" alt="tensorflow" width="40" height="40"/> </a> </p>
@@ -101,3 +101,36 @@ A first model trained on less than 300 images turned out to be very deceiving, a
 ## Biases and limitations
 
 The dataset was created as such that its performance in only guarantee if I am the user: the output will likely be unsatisfactory if people of other genders, ethnicities, or with special outfits and accessories use the model in a computer vision application. Despite these, I would nonetheless recommend the metodology outlined above for the creation of small datasets for machine learning models to those who are interested in engaging in small-scale learning projects.
+
+# Virtual environment setup
+
+The project included the creation of a virtual environment. Tensorflow is notoriously hard to install in MacBooks with the M1 chip, like mine, therefore the task was quite frustrating and time-consuming. For those who might face the same problem, I recommend making sure your operating system is up-to-date, downloading the file at this [link](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh) and then following the following steps:
+
+```python
+# create the environment
+# python=3.9 is needed for compatibility reasons
+# new_env is the name of your new environment 
+conda create -n new-env python=3.9
+# activate the environment
+conda activate new-env
+# install pip
+conda install pip
+# give executable permissions to the file you downloaded
+chmod +x ~/Downloads/Miniforge3-MacOSX-arm64.sh
+# execute the file you downloaded
+sh ~/Downloads/Miniforge3-MacOSX-arm64.sh
+# if your virtual environment changed, make sure you activate it: conda activate new-env
+# activate miniforge3 
+source ~/miniforge3/bin/activate
+# if your virtual environment changed, make sure you activate it: conda activate new-env
+# install tensorflow
+conda install -c apple tensorflow-deps
+# install the required dependencies for Mac
+python -m pip install tensorflow-macos
+# install the metal plugin
+python -m pip install tensorflow-metal
+```
+
+Our environment additionally contained `opencv` (which allows to use the camera) and `ipykernel`, which allows to use Jupyter Notebooks. All requirements are in the `requirements.txt` file.
+
+# Creation of the manual version
