@@ -134,3 +134,32 @@ python -m pip install tensorflow-metal
 Our environment additionally contained `opencv` (which allows to use the camera) and `ipykernel`, which allows to use Jupyter Notebooks. All requirements are in the `requirements.txt` file.
 
 # Creation of the manual version
+
+The `manual_rps.py` file contains a first version of the code which checks the basic logic behind it manually. The file is created using OOP principles, and is therefore organised around a class, `Game()`. The features of the class are the following, as indicated in the `docstring`:
+
+1- Parameters:
+- gesture_list: list of gestures to be used in the game;
+2- Attributes:
+- computer_choice: string, the gesture to be played by the computer, picked randomly from gesture_list;
+- user_choice: str, the gesture played by the user (input)
+- winner: str, the winner of the match/game
+3- Methods:
+- get_computer_choice(computer_choice): gets the computer's input;
+- get_user_choice(user_choice): gets the user's input;
+- get_winner(computer_choice, user_choice, winner): returns the name of the winner.
+
+The basic logic of the game is contained within the `get_winner()` method, which utilises a series of nested if-else statements to determine the winner. The statements resembles the following one, which checks whether the input by the user and the computer is the same and, if not, checks whether the computer's input is "Rock", and then acts accordignly.
+
+```python
+if computer_choice == user_choice:
+    print(f"The computer too chose {computer_choice}. No one wins this match!")
+elif computer_choice == "Rock":
+    if user_choice == "Paper":
+        winner = user
+        print(f"The computer chose {computer_choice}. The user wins this match!")
+    elif user_choice == "Scissors":
+        winner = computer
+        print(f"The computer chose {computer_choice}. The computer wins this match!")
+```
+
+The method `get_winner()` returns the name of the winner.
