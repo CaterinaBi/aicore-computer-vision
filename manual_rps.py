@@ -38,15 +38,15 @@ class Game:
       elif user_choice == "Rock":
         winner = user
         print(f"The computer chose {computer_choice}. The user wins this match!")
-   return winner
+    return winner
 
 def play_game(gesture_list):
-    game = Game(gesture_list)
-    game.get_computer_choice(game.computer_choice)
-    game.get_user_choice(game.user_choice)
-    game.get_winner(game.computer_choice, game.user_choice, game.winner)
+  game = Game(gesture_list)
+  game.get_computer_choice(game.computer_choice)
+  game.get_user_choice(game.user_choice)
+  game.get_winner(game.computer_choice, game.user_choice, game.winner)
 
 if __name__ == '__main__':
-    gesture_list = ["Rock", "Paper", "Scissors"]
-    play_game(gesture_list)
+  gesture_list = ["Rock", "Paper", "Scissors"]
+  play_game(gesture_list)
 # %%
