@@ -1,5 +1,10 @@
 import random
+'''
+    A game of Rock, Paper, Scissors in which the user plays against the computer.
+    The user inputs their chosen gesture using the webcam.
+    The user input is understood by the computer via a ML model, keras.model.h5.
 
+    '''
 class Game:
   def __init__(self, gesture_list):
         self.computer_choice = random.choice(gesture_list)
