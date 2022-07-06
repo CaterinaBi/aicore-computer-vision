@@ -4,6 +4,28 @@ import random
     The user inputs their chosen gesture using the webcam.
     The user input is understood by the computer via a ML model, keras.model.h5.
 
+    Parameters:
+    ----------
+    gesture_list: list
+        List of gestures to be used in the game
+
+    Attributes:
+    ----------
+    computer_choice: str
+        The gesture to be played by the computer, picked randomly from gesture_list
+    user_choice: str
+        The gesture played by the user (input)
+    winner: str
+        The winner of the match/game
+
+    Methods:
+    -------
+    get_computer_choice(computer_choice)
+        Gets the computer's input.
+    get_user_choice(user_choice)
+        Gets the user's input.
+    get_winner(computer_choice, user_choice, winner)
+        Returns the name of the winner.
     '''
 class Game:
   def __init__(self, gesture_list):
