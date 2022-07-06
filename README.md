@@ -8,7 +8,13 @@ Computer vision project that I am working on as part of my 'AI and Data Engineer
 
 ![This is an image taken from the AiCore portal](images/portal_png.png)
 
-> Rock-Paper-Scissors is a game in which each player simultaneously shows one of three hand signals representing rock, paper, or scissors. Rock beats scissors. Scissors beats paper. Paper beats rock. The player who shows the first option that beats the other player's option wins. This is an implementation of an interactive "Rock Paper Scissors" game in which the user can play with the computer using the camera.
+# Overview of the project
+
+Rock-Paper-Scissors is a game in which each player simultaneously shows one of three hand signals representing rock, paper, or scissors. Rock beats scissors. Scissors beats paper. Paper beats rock. The player who shows the first option that beats the other player's option wins. This is an implementation of an interactive "Rock Paper Scissors" game in which the user can play with the computer using the camera.
+
+# Learning objectives
+
+The project's main learning objectives of this project were the creation of a (small) image database for computer vision tasks, the set up of virtual environments and the installation of all required packages, and the practice of Python programming - especially 'if-else' statement, 'while' loops, and object oriented programming.
 
 # Project structure
 
