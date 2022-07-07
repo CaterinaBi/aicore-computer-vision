@@ -32,16 +32,20 @@ import random
         Returns the name of the winner.
     '''
 class Game:
-  def __init__(self, gesture_list):
-        self.computer_choice = random.choice(gesture_list)
+  def __init__(self):
         # self.user_choice = input("Please choose your move: ")
         self.winner = str
 
-  def get_computer_choice(self, computer_choice):
+  def get_computer_choice(self):
     '''
     Returns a string randomly selected from gesture_list
     '''
-    return computer_choice
+    self.computer_choice = random.choice(gesture_list)
+    return self.computer_choice
+
+
+# method that just captures the video
+# method that gets the prediction
 
   def get_prediction(self):
     '''
@@ -94,6 +98,7 @@ class Game:
     Gets the index of the biggest number in the prediction list.
     Extracts the element with the corresponding index from gesture_list
     '''
+    # use np.arg_max
     self.gesture_index = max(self.get_prediction[index])
     self.user_gesture = gesture_list[index]
     print(self.get_gesture)
@@ -133,7 +138,7 @@ class Game:
 
 def play_game(gesture_list):
   game = Game(gesture_list)
-  game.get_computer_choice(game.computer_choice)
+  game.get_computer_choice()
   # game.get_user_choice(game.user_choice)
   game.get_prediction()
   game.get_gesture()
