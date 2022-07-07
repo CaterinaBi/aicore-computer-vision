@@ -100,7 +100,9 @@ A first model trained on less than 300 images turned out to be very deceiving, a
 
 ## Biases and limitations
 
-The dataset was created as such that its performance in only guarantee if I am the user: the output will likely be unsatisfactory if people of other genders, ethnicities, or with special outfits and accessories use the model in a computer vision application. Despite these, I would nonetheless recommend the metodology outlined above for the creation of small datasets for machine learning models to those who are interested in engaging in small-scale learning projects.
+The dataset was created as such that its performance in only guarantee if I am the user: the output will likely be unsatisfactory if people of other genders, ethnicities, or with special outfits and accessories use the model in a computer vision application. 
+
+Despite this, I would nonetheless recommend the metodology for the creation of small datasets for machine learning models outlined above to those who are interested in engaging in small-scale learning projects, as a maximally varied dataset is a good way to reduce overfitting problems.
 
 # Virtual environment setup
 
