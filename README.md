@@ -27,17 +27,14 @@ The project comprises of four milestones organised as follows:
 - creation of the dataset to be used to train the model used in the programme;
 - creation of the model using [Teachable Machine](https://teachablemachine.withgoogle.com/).
 
-
 2 - MILESTONE 2: Installation of the dependencies.
 - creation of a new virtual environment;
 - model testing on the local machine.
-
 
 3 - MILESTONE 3: Creation of a 'Rock, Paper, Scissors' game.
 - store the user's and the computer's choices;
 - figure out who won;
 - create a function to simulate the game.
-
 
 4 - MILESTONE 4: Using the camera to play the game.
 - set up the camera and test the game;
@@ -142,10 +139,12 @@ The `manual_rps.py` file contains a first version of the code which checks the b
 
 1- Parameters:
 - gesture_list: list of gestures to be used in the game;
+
 2- Attributes:
 - computer_choice: string, the gesture to be played by the computer, picked randomly from gesture_list;
 - user_choice: str, the gesture played by the user (input)
 - winner: str, the winner of the match/game
+
 3- Methods:
 - get_computer_choice(computer_choice): gets the computer's input;
 - get_user_choice(user_choice): gets the user's input;
