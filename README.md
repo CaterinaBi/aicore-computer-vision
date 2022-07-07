@@ -27,14 +27,17 @@ The project comprises of four milestones organised as follows:
 - creation of the dataset to be used to train the model used in the programme;
 - creation of the model using [Teachable Machine](https://teachablemachine.withgoogle.com/).
 
+
 2 - MILESTONE 2: Installation of the dependencies.
 - creation of a new virtual environment;
 - model testing on the local machine.
+
 
 3 - MILESTONE 3: Creation of a 'Rock, Paper, Scissors' game.
 - store the user's and the computer's choices;
 - figure out who won;
 - create a function to simulate the game.
+
 
 4 - MILESTONE 4: Using the camera to play the game.
 - set up the camera and test the game;
