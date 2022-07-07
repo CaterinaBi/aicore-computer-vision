@@ -31,31 +31,34 @@ import random
     -------
     get_computer_choice(computer_choice)
         Gets the computer's input.
-    get_predicion(user_choice)
+    get_prediction(user_choice)
         Gets the user's input from the camera.
     get_winner(computer_choice, user_choice, winner)
         Returns the name of the winner.
     '''
-model = load_model('keras_model.h5')
-cap = cv2.VideoCapture(0)
-data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
-while True: 
-    ret, frame = cap.read()
-    resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
-    image_np = np.array(resized_frame)
-    normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
-    data[0] = normalized_image
-    prediction = model.predict(data)
-    cv2.imshow('frame', frame)
-    # Press q to close the window
-    print(prediction)
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+def get_prediction(self):
+    self.model = load_model('keras_model.h5')
+    cap = cv2.VideoCapture(0)
+    data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+
+    while True: 
+        self.ret, frame = cap.read()
+        resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
+        image_np = np.array(resized_frame)
+        normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
+        data[0] = normalized_image
+        prediction = self.model.predict(data)
+        cv2.imshow('frame', frame)
+        # Press q to close the window
+        print(prediction)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
             
-# After the loop release the cap object
-cap.release()
-# Destroy all the windows
-cv2.destroyAllWindows()
+    # After the loop release the cap object
+    cap.release()
+    # Destroy all the windows
+    cv2.destroyAllWindows()
+    return prediction
 
 # %%
