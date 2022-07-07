@@ -1,8 +1,8 @@
 import random
 '''
     A game of Rock, Paper, Scissors in which the user plays against the computer.
-    The user inputs their chosen gesture using the webcam.
-    The user input is understood by the computer via a ML model, keras.model.h5.
+    The user inputs their chosen gesture in writing.
+    The computer chooses its move randomly from a pre-determined list.
 
     Parameters:
     ----------
