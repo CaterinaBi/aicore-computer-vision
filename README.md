@@ -106,7 +106,9 @@ Despite this, I would nonetheless recommend the metodology for the creation of s
 
 # Virtual environment setup
 
-The project included the creation of a virtual environment. Tensorflow is notoriously hard to install in MacBooks with the M1 chip, like mine, therefore the task was quite frustrating and time-consuming. For those who might face the same problem, I recommend making sure your operating system is up-to-date, downloading the file at this [link](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh) and then following the following steps:
+The project included the creation of a virtual environment, and the installation of all required dependencies (`tensorflow`, `opencv`, `ipykernel`). 
+
+Tensorflow is notoriously hard to install in MacBooks with the M1 chip, like mine, therefore the task was quite frustrating and time-consuming. For those who might face the same problem, I recommend making sure your operating system is up-to-date, downloading the file at this [link](https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh) and then following the following steps:
 
 ```python
 # create the environment
