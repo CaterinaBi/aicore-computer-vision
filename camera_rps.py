@@ -46,6 +46,7 @@ class Game:
     return computer_choice
 
   # replaces get_user_choice()
+  # do not change anything, it' projecting the video now
   def get_prediction(self):
     ret, frame = self.cap.read()
     resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
@@ -86,12 +87,15 @@ class Game:
     return winner
 
 def play_game(gesture_list):
-  while True:
+  round_number = 0
+  # working like a charm, now camera stops after three rounds
+  while round_number <= 3:
     game = Game(gesture_list)
     game.get_computer_choice(game.computer_choice)
     game.get_prediction()
     # game.get_user_choice(game.user_choice)
     game.get_winner(game.computer_choice, game.get_prediction, game.winner)
+    round_number += 1
     # Press q to close the window
     if cv2.waitKey(1) & 0xFF == ord('q'):
       break
