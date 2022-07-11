@@ -3,7 +3,7 @@ from keras.models import load_model
 import numpy as np
 import random
 '''
-    NEEDS UPLOADING
+    NEEDS UPDATING
     A game of Rock, Paper, Scissors in which the user plays against the computer.
     The user inputs their chosen gesture in writing.
     The computer chooses its move randomly from a pre-determined list.
@@ -32,130 +32,75 @@ import random
         Returns the name of the winner.
     '''
 class Game:
+  def __init__(self, gesture_list):
+        self.computer_choice = random.choice(gesture_list)
+        # self.user_choice = input("Please choose your move: ")
+        self.winner = str
 
-  def __init__(self):
-    self.model = load_model('keras_model.h5')
-    self.cap = cv2.VideoCapture(0)
-    # self.user_choice = input("Please choose your move: ")
-    # self.winner = str
+        # model, video and data attributes
+        self.model = load_model('keras_model.h5')
+        self.cap = cv2.VideoCapture(0)
+        self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
-  def get_computer_choice(self):
-    '''
-    Returns a string randomly selected from gesture_list
-    '''
-    self.computer_choice = random.choice(gesture_list)
-    return self.computer_choice
+  def get_computer_choice(self, computer_choice):
+    return computer_choice
 
-
-# method that just captures the video
-# method that gets the prediction
-
-  def get_video(self):
-    '''
-    Activates the camera
-    '''
-    self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
-    self.ret, frame = cap.read()
-        resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
-        image_np = np.array(resized_frame)
-        self.normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
-        self.data[0] = self.normalized_image
-
-        # font to be used in text message
-        self.font = cv2.FONT_HERSHEY_SIMPLEX
-        # uses putText() to insert text in video
-        cv2.putText(frame,
-                    'WELCOME TO ROCK, PAPER, SCISSORS!',
-                    (300, 600),
-                    self.font, 1,
-                    (255, 255, 255),
-                    2,
-                    cv2.LINE_4)
-        cv2.putText(frame,
-                    'Press c to continue, or q to exit.',
-                    (300, 640),
-                    self.font, 1,
-                    (255, 255, 255),
-                    2,
-                    cv2.LINE_4)
-        # displays the resulting frame
-        cv2.imshow('frame', frame)
-        # releases the cap object after the loop
-        self.cap.release()
-        # destroys all windows
-        cv2.destroyAllWindows()
-
-  def close_window(self):
-    # Press q to close the window
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-
-  def open_window(self):
-    if cv2.waitKey(1) & 0xFF == ord('s'):
-      self.video_started = True
-
+  # replaces get_user_choice()
   def get_prediction(self):
-    '''
-    Returns the predictions of the model in the form
-    of a list called prediction.
-    '''
+    ret, frame = self.cap.read()
+    resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
+    image_np = np.array(resized_frame)
+    normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
+    self.data[0] = normalized_image
     prediction = self.model.predict(self.data)
-    print(prediction)
+    cv2.imshow('frame', frame)
     return prediction
 
-  def get_gesture(self, prediction):
-    '''
-    Gets the index of the biggest number in the prediction list.
-    Extracts the element with the corresponding index from gesture_list
-    '''
-    # use np.arg_max
-    # prediction = self.get_prediction()
-    self.gesture_index = np.argmax(prediction)
-    self.user_gesture = gesture_list[self.gesture_index]
-    print(self.user_gesture)
-    return self.user_gesture
-
-  def get_winner(self, computer_choice, winner):
-    '''
-    Outputs the winner of each round, and then the game
-    '''
+  def get_winner(self, computer_choice, user_choice, winner):
     user = str
     computer = str
-    user_choice = self.get_gesture()
+    user_choice = self.get_prediction()
     if computer_choice == user_choice:
-      print(f"The computer too chose {computer_choice}. No one wins this round!")
+      print(f"The computer too chose {computer_choice}. No one wins this match!")
     elif computer_choice == "Rock":
       if user_choice == "Paper":
         winner = user
-        print(f"The computer chose {computer_choice}. The user wins this round!")
+        print(f"The computer chose {computer_choice}. The user wins this match!")
       elif user_choice == "Scissors":
         winner = computer
-        print(f"The computer chose {computer_choice}. The computer wins this round!")
+        print(f"The computer chose {computer_choice}. The computer wins this match!")
     elif computer_choice == "Paper":
       if user_choice == "Rock":
         winner = computer
-        print(f"The computer chose {computer_choice}. The computer wins this round!")
+        print(f"The computer chose {computer_choice}. The computer wins this match!")
       elif user_choice == "Scissors":
         winner = user
-        print(f"The computer chose {computer_choice}. The user wins this round!")
+        print(f"The computer chose {computer_choice}. The user wins this match!")
     else:
       if user_choice == "Paper":
         winner = computer
-        print(f"The computer chose {computer_choice}. The computer wins this round!")
+        print(f"The computer chose {computer_choice}. The computer wins this match!")
       elif user_choice == "Rock":
         winner = user
-        print(f"The computer chose {computer_choice}. The user wins this round!")
+        print(f"The computer chose {computer_choice}. The user wins this match!")
     return winner
 
-def play_game():
-  game = Game()
-  #game.get_computer_choice()
-  # game.get_user_choice(game.user_choice)
-  game.get_video()
-  #game.get_prediction()
-  #game.get_gesture(game.prediction)
-  #game.get_winner(game.computer_choice, game.winner)
+def play_game(gesture_list):
+  while True:
+    game = Game(gesture_list)
+    game.get_computer_choice(game.computer_choice)
+    game.get_prediction()
+    # game.get_user_choice(game.user_choice)
+    game.get_winner(game.computer_choice, game.get_prediction, game.winner)
+    # Press q to close the window
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+      break
+  # After the loop release the cap object
+  game.cap.release()
+  # Destroy all the windows
+  game.cv2.destroyAllWindows()
 
 if __name__ == '__main__':
-  gesture_list = ["None", "Rock", "Paper", "Scissors"]
-  play_game()
+  gesture_list = ["Rock", "Paper", "Scissors"]
+  play_game(gesture_list)
 # %%

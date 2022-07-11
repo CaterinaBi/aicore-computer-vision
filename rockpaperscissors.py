@@ -65,8 +65,9 @@ class RockPaperScissors:
 
   def get_prediction(self):
     '''
+    Substitutes get_user_choice().
     Returns the predictions of the model in the form
-    of a list called prediction.
+    of a list of tuples called user_gesture.
     '''
     prediction = self.model.predict(self.data)
     self.gesture_index = np.argmax(prediction)
