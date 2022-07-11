@@ -15,8 +15,8 @@ class RockPaperScissors:
     self.gesture_list = ["none", "rock", "paper", "scissors"]
 
     # messages to desplay on the screen
-    self.intro_message = ""
-    self.instruction_message = ""
+    self.intro_message = "" # bottom centered
+    self.instruction_message = "" # right below intro_message
 
   def get_computer_choice(self):
     # returns a string randomly selected from gesture_list
