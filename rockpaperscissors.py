@@ -18,6 +18,9 @@ class RockPaperScissors:
     self.intro_message = "" # bottom centered
     self.instruction_message = "" # right below intro_message
 
+    # working logic variables
+    self.video_started = False
+
   def get_computer_choice(self):
     # returns a string randomly selected from gesture_list
     self.computer_choice = random.choice(self.gesture_list)
@@ -49,6 +52,7 @@ class RockPaperScissors:
       self.cap.release()
       # destroys all windows
       cv2.destroyAllWindows()
+      self.video_started = False
 
   def intro_messages(self):
     self.intro_message = "WELCOME TO ROCK, PAPER, SCISSORS!"
@@ -65,16 +69,6 @@ class RockPaperScissors:
     of a list called prediction.
     '''
     prediction = self.model.predict(self.data)
-    print(prediction)
-    return prediction
-
-  def get_gesture(self, prediction):
-    '''
-    Gets the index of the biggest number in the prediction list.
-    Extracts the element with the corresponding index from gesture_list
-    '''
-    # use np.arg_max
-    # prediction = self.get_prediction()
     self.gesture_index = np.argmax(prediction)
     self.user_gesture = self.gesture_list[self.gesture_index]
     print(self.user_gesture)
@@ -82,7 +76,7 @@ class RockPaperScissors:
 
   def get_winner(self, computer_choice, winner):
     '''
-    Outputs the winner of each round, and then the game
+    Outputs the winner of each round, and then the game's
     '''
     user = str
     computer = str

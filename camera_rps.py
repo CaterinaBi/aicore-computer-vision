@@ -32,9 +32,12 @@ import random
         Returns the name of the winner.
     '''
 class Game:
+
   def __init__(self):
-        # self.user_choice = input("Please choose your move: ")
-        self.winner = str
+    self.model = load_model('keras_model.h5')
+    self.cap = cv2.VideoCapture(0)
+    # self.user_choice = input("Please choose your move: ")
+    # self.winner = str
 
   def get_computer_choice(self):
     '''
@@ -51,9 +54,8 @@ class Game:
     '''
     Activates the camera
     '''
-    cap = cv2.VideoCapture(0)
-    while True: 
-        self.ret, frame = cap.read()
+    self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+    self.ret, frame = cap.read()
         resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
         image_np = np.array(resized_frame)
         self.normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
@@ -78,22 +80,24 @@ class Game:
                     cv2.LINE_4)
         # displays the resulting frame
         cv2.imshow('frame', frame)
-        # Press q to close the window
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-            
-    # releases the cap object after the loop
-    cap.release()
-    # destroys all windows
-    cv2.destroyAllWindows()
+        # releases the cap object after the loop
+        self.cap.release()
+        # destroys all windows
+        cv2.destroyAllWindows()
+
+  def close_window(self):
+    # Press q to close the window
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+
+  def open_window(self):
+    if cv2.waitKey(1) & 0xFF == ord('s'):
+      self.video_started = True
 
   def get_prediction(self):
     '''
     Returns the predictions of the model in the form
     of a list called prediction.
     '''
-    self.model = load_model('keras_model.h5')
-    self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
     prediction = self.model.predict(self.data)
     print(prediction)
     return prediction
@@ -104,7 +108,7 @@ class Game:
     Extracts the element with the corresponding index from gesture_list
     '''
     # use np.arg_max
-    prediction = self.get_prediction()
+    # prediction = self.get_prediction()
     self.gesture_index = np.argmax(prediction)
     self.user_gesture = gesture_list[self.gesture_index]
     print(self.user_gesture)
