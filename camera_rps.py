@@ -34,24 +34,24 @@ import random
     '''
 class Game:
   def __init__(self, gesture_list):
-        self.computer_choice = random.choice(gesture_list)
-        # self.user_choice = input("Please choose your move: ")
+    self.computer_choice = random.choice(gesture_list)
+    # self.user_choice = input("Please choose your move: ")
 
-        # model, video and data attributes
-        self.model = load_model('keras_model.h5')
-        self.cap = cv2.VideoCapture(0)
-        self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+    # model, video and data attributes
+    self.model = load_model('keras_model.h5')
+    self.cap = cv2.VideoCapture(0)
+    self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
-        # messages to be displayed
-        # font to be used in text messages
-        self.font = cv2.FONT_HERSHEY_SIMPLEX
-        self.intro_message = "WELCOME TO THE GAME OF ROCK, PAPER, SCISSORS!"
-        self.instruction_message = "Press 'c' to continue, or 'q' to quit."
+    # messages to be displayed
+    # font to be used in text messages
+    self.font = cv2.FONT_HERSHEY_SIMPLEX
+    self.intro_message = "WELCOME TO THE GAME OF ROCK, PAPER, SCISSORS!"
+    self.instruction_message = "Press 'c' to continue, or 'q' to quit."
 
-        self.user_choice = self.get_prediction()
-        self.user = str
-        self.computer = str
-        self.winner = str
+    self.user_choice = self.get_prediction()
+    self.user = str
+    self.computer = str
+    self.winner = str
 
   def get_computer_choice(self, computer_choice):
     return computer_choice
@@ -82,9 +82,10 @@ class Game:
     prediction = self.get_prediction()
     choice_probability = {'Rock': prediction[0,1], 'Paper': prediction[0,2], 'Scissors': prediction[0,3]}
     self.user_prediction = max(choice_probability, key=choice_probability.get)
+    print(f"The machine predicted that the user gesture was {self.user_prediction}")
     return self.user_prediction
 
-
+  # determines winner
   def get_winner(self, computer_choice, user_choice, winner):
     if computer_choice == user_choice:
       print(f"The computer too chose {computer_choice}. No one wins this match!")
@@ -117,9 +118,11 @@ def play_game(gesture_list):
   while round_number <= 3:
     game = Game(gesture_list)
     game.get_computer_choice(game.computer_choice)
+    print(game.computer_choice)
     game.get_prediction()
     # game.get_user_choice(game.user_choice)
     # game.classify_output()
+    game.classify_output()
     game.get_winner(game.computer_choice, game.user_choice, game.winner)
     round_number += 1
     # Press q to close the window
