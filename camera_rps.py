@@ -42,6 +42,12 @@ class Game:
         self.cap = cv2.VideoCapture(0)
         self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
+        # messages to be displayed
+        # font to be used in text messages
+        self.font = cv2.FONT_HERSHEY_SIMPLEX
+        self.intro_message = "WELCOME TO THE GAME OF ROCK, PAPER, SCISSORS!"
+        self.instruction_message = "Press 'c' to continue, or 'q' to quit."
+
         self.user_choice = self.get_prediction()
         self.user = str
         self.computer = str
@@ -59,6 +65,10 @@ class Game:
     normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
     self.data[0] = normalized_image
     prediction = self.model.predict(self.data)
+    cv2.putText(frame, self.intro_message, (300, 600), self.font, 1, 
+                                (255, 255, 255), 2, cv2.LINE_4)
+    cv2.putText(frame, self.instruction_message, (300, 640), self.font, 1,
+                                (255, 255, 255), 2, cv2.LINE_4)
     cv2.imshow('frame', frame)
     # self.classify_output(prediction)
     return prediction
@@ -73,6 +83,14 @@ class Game:
     choice_probability = {'Rock': prediction[0,1], 'Paper': prediction[0,2], 'Scissors': prediction[0,3]}
     self.user_prediction = max(choice_probability, key=choice_probability.get)
     return self.user_prediction
+
+  def messages_to_display(self, frame):
+    # font to be used in text messages
+    self.font = cv2.FONT_HERSHEY_SIMPLEX
+    # uses putText() to insert text in the video
+    cv2.putText(frame, self.intro_message, (300, 600), self.font, 1, 
+                                (255, 255, 255), 2, cv2.LINE_4)
+    
 
   def get_winner(self, computer_choice, user_choice, winner):
     if computer_choice == user_choice:
