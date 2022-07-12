@@ -2,7 +2,7 @@ import cv2
 from keras.models import load_model
 import numpy as np
 import random
-# import time
+import time
 '''
     NEEDS UPDATING
     A game of Rock, Paper, Scissors in which the user plays against the computer.
@@ -49,9 +49,12 @@ class Game:
     self.instruction_message = "Press 'c' to continue, or 'q' to quit."
 
     self.user_choice = self.get_prediction()
+    self.computer_lives = 3
+    self.user_lives = 3
     self.user = str
     self.computer = str
     self.winner = str
+    self.seconds = 0
 
   def get_computer_choice(self, computer_choice):
     print(f"The computer choice is {computer_choice}")
@@ -73,6 +76,17 @@ class Game:
     cv2.imshow('frame', frame)
     # self.classify_output(prediction)
     return prediction
+
+  #def countdown(self):
+    #print("Countdown starts now. Show me your choice in...")
+    #while True:
+      #time.sleep(1)
+      #self.seconds = time.time()
+      #if self.seconds >= 1 and self.seconds <= 5:
+        #print(f"{self.seconds} seconds left")
+      #elif self.seconds == 6:
+        #print("Show your choice to the camera NOW!")
+        #break
   
   # gets gesture out of prediction
   def classify_output(self):
@@ -87,46 +101,54 @@ class Game:
     return self.user_prediction
 
   # determines winner
-  def get_winner(self, computer_choice, user_choice, winner):
+  def get_winner(self, computer_choice, user_choice, computer_lives, user_lives, winner):
     computer_choice = self.get_computer_choice(computer_choice)
     user_choice = self.classify_output()
     if computer_choice == user_choice:
-      print(f"The computer too chose {computer_choice}. No one wins this match!")
+      print(f"The computer too chose {computer_choice}. No one wins this round!")
     elif computer_choice == "Rock":
       if user_choice == "Paper":
         winner = self.user
-        print(f"The computer chose {computer_choice}. The user wins this match!")
+        computer_lives -= 1
+        print(f"The computer chose {computer_choice}. The user wins this round! The computer now has {computer_lives} lives left.")
       elif user_choice == "Scissors":
         winner = self.computer
-        print(f"The computer chose {computer_choice}. The computer wins this match!")
+        user_lives -= 1
+        print(f"The computer chose {computer_choice}. The computer wins this round! The user now has {user_lives} lives left.")
     elif computer_choice == "Paper":
       if user_choice == "Rock":
         winner = self.computer
-        print(f"The computer chose {computer_choice}. The computer wins this match!")
+        user_lives -= 1
+        print(f"The computer chose {computer_choice}. The computer wins this round! The user now has {user_lives} lives left.")
       elif user_choice == "Scissors":
         winner = self.user
-        print(f"The computer chose {computer_choice}. The user wins this match!")
+        computer_lives -= 1
+        print(f"The computer chose {computer_choice}. The user wins this round! The computer now has {computer_lives} lives left.")
     else:
       if user_choice == "Paper":
         winner = self.computer
-        print(f"The computer chose {computer_choice}. The computer wins this match!")
+        user_lives -= 1
+        print(f"The computer chose {computer_choice}. The computer wins this round! The user now has {user_lives} lives left.")
       elif user_choice == "Rock":
         winner = self.user
-        print(f"The computer chose {computer_choice}. The user wins this match!")
+        computer_lives -= 1
+        print(f"The computer chose {computer_choice}. The user wins this round! The computer now has {computer_lives} lives left.")
     return winner
 
 def play_game(gesture_list):
   round_number = 0
   # working like a charm, now camera stops after three rounds
   while round_number <= 3:
+    print(f"Round number {round_number}.")
     game = Game(gesture_list)
     game.get_computer_choice(game.computer_choice)
+    #game.countdown()
     # print(game.computer_choice)
     game.get_prediction()
     # game.get_user_choice(game.user_choice)
     # game.classify_output()
     game.classify_output()
-    game.get_winner(game.computer_choice, game.user_choice, game.winner)
+    game.get_winner(game.computer_choice, game.user_choice, game.computer_lives, game.user_lives, game.winner)
     round_number += 1
     # Press q to close the window
     if cv2.waitKey(1) & 0xFF == ord('q'):
