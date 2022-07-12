@@ -84,13 +84,6 @@ class Game:
     self.user_prediction = max(choice_probability, key=choice_probability.get)
     return self.user_prediction
 
-  def messages_to_display(self, frame):
-    # font to be used in text messages
-    self.font = cv2.FONT_HERSHEY_SIMPLEX
-    # uses putText() to insert text in the video
-    cv2.putText(frame, self.intro_message, (300, 600), self.font, 1, 
-                                (255, 255, 255), 2, cv2.LINE_4)
-    
 
   def get_winner(self, computer_choice, user_choice, winner):
     if computer_choice == user_choice:
