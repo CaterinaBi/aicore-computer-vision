@@ -136,7 +136,7 @@ class Game:
     return winner
 
 def play_game(gesture_list):
-  round_number = 0
+  round_number = 1
   # working like a charm, now camera stops after three rounds
   while round_number <= 3:
     print(f"Round number {round_number}.")
@@ -149,6 +149,10 @@ def play_game(gesture_list):
     # game.classify_output()
     game.classify_output()
     game.get_winner(game.computer_choice, game.user_choice, game.computer_lives, game.user_lives, game.winner)
+    if game.winner == game.user:
+      game.user_lives -= 1
+    elif game.winner == game.computer:
+      game.computer_lives -=1
     round_number += 1
     # Press q to close the window
     if cv2.waitKey(1) & 0xFF == ord('q'):
