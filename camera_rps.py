@@ -2,6 +2,7 @@ import cv2
 from keras.models import load_model
 import numpy as np
 import random
+# import time
 '''
     NEEDS UPDATING
     A game of Rock, Paper, Scissors in which the user plays against the computer.
@@ -35,12 +36,16 @@ class Game:
   def __init__(self, gesture_list):
         self.computer_choice = random.choice(gesture_list)
         # self.user_choice = input("Please choose your move: ")
-        self.winner = str
 
         # model, video and data attributes
         self.model = load_model('keras_model.h5')
         self.cap = cv2.VideoCapture(0)
         self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+
+        self.user_choice = self.get_prediction()
+        self.user = str
+        self.computer = str
+        self.winner = str
 
   def get_computer_choice(self, computer_choice):
     return computer_choice
@@ -55,34 +60,43 @@ class Game:
     self.data[0] = normalized_image
     prediction = self.model.predict(self.data)
     cv2.imshow('frame', frame)
+    # self.classify_output(prediction)
     return prediction
+  
+  # gets gesture out of prediction
+  def classify_output(self):
+    """
+    Uses the list of probabilities output from get_prediction
+    to determine the image inputted in the camera.
+    """
+    prediction = self.get_prediction()
+    choice_probability = {'Rock': prediction[0,1], 'Paper': prediction[0,2], 'Scissors': prediction[0,3]}
+    self.user_prediction = max(choice_probability, key=choice_probability.get)
+    return self.user_prediction
 
   def get_winner(self, computer_choice, user_choice, winner):
-    user = str
-    computer = str
-    user_choice = self.get_prediction()
     if computer_choice == user_choice:
       print(f"The computer too chose {computer_choice}. No one wins this match!")
     elif computer_choice == "Rock":
       if user_choice == "Paper":
-        winner = user
+        winner = self.user
         print(f"The computer chose {computer_choice}. The user wins this match!")
       elif user_choice == "Scissors":
-        winner = computer
+        winner = self.computer
         print(f"The computer chose {computer_choice}. The computer wins this match!")
     elif computer_choice == "Paper":
       if user_choice == "Rock":
-        winner = computer
+        winner = self.computer
         print(f"The computer chose {computer_choice}. The computer wins this match!")
       elif user_choice == "Scissors":
-        winner = user
+        winner = self.user
         print(f"The computer chose {computer_choice}. The user wins this match!")
     else:
       if user_choice == "Paper":
-        winner = computer
+        winner = self.computer
         print(f"The computer chose {computer_choice}. The computer wins this match!")
       elif user_choice == "Rock":
-        winner = user
+        winner = self.user
         print(f"The computer chose {computer_choice}. The user wins this match!")
     return winner
 
@@ -94,7 +108,8 @@ def play_game(gesture_list):
     game.get_computer_choice(game.computer_choice)
     game.get_prediction()
     # game.get_user_choice(game.user_choice)
-    game.get_winner(game.computer_choice, game.get_prediction, game.winner)
+    # game.classify_output()
+    game.get_winner(game.computer_choice, game.user_choice, game.winner)
     round_number += 1
     # Press q to close the window
     if cv2.waitKey(1) & 0xFF == ord('q'):

@@ -20,6 +20,8 @@ class RockPaperScissors:
 
     # working logic variables
     self.video_started = False
+    # self.start_time
+    # self.round_number
 
   def get_computer_choice(self):
     # returns a string randomly selected from gesture_list
@@ -109,11 +111,17 @@ class RockPaperScissors:
 
 def play_game():
   game = RockPaperScissors()
+  while game.run < 5:
+    pass
   #game.get_computer_choice()
   # game.get_user_choice(game.user_choice)
   game.get_video()
   #game.get_prediction()
   #game.get_gesture(game.prediction)
   #game.get_winner(game.computer_choice, game.winner)
+
+  # instead of while True, use while time < x
+  # this avoids the endless loop
+  # use time.time()
 
 # %%
