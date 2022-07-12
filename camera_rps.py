@@ -55,6 +55,10 @@ class Game:
     self.computer = str
     self.winner = str
     self.seconds = 0
+    # self.start_time = 0
+    # self.seconds = 0
+    # self.show_time = 0
+    self.video_pause = 0
 
   def get_computer_choice(self, computer_choice):
     print(f"The computer choice is {computer_choice}")
@@ -138,13 +142,21 @@ class Game:
 def play_game(gesture_list):
   round_number = 1
   # working like a charm, now camera stops after three rounds
-  while round_number <= 3:
-    print(f"Round number {round_number}.")
-    game = Game(gesture_list)
+  print(f"Round number {round_number}.")
+  game = Game(gesture_list)
+  while game.computer_lives >= 1 and game.user_lives >= 1:
     game.get_computer_choice(game.computer_choice)
     #game.countdown()
     # print(game.computer_choice)
+    print("Prepare to show me your chosen gesture in 3 seconds!")
+    time.sleep(3)
+    print("Show me your hand NOW!")
+    game.video_pause = time.time()
     game.get_prediction()
+    game.video_pause *= 10
+    print("Thanks!")
+    # game.start_time = time.time()
+    # game.show_time = time.time() * 2
     # game.get_user_choice(game.user_choice)
     # game.classify_output()
     game.classify_output()
