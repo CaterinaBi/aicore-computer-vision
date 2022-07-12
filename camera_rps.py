@@ -54,6 +54,7 @@ class Game:
     self.winner = str
 
   def get_computer_choice(self, computer_choice):
+    print(f"The computer choice is {computer_choice}")
     return computer_choice
 
   # replaces get_user_choice()
@@ -87,6 +88,8 @@ class Game:
 
   # determines winner
   def get_winner(self, computer_choice, user_choice, winner):
+    computer_choice = self.get_computer_choice(computer_choice)
+    user_choice = self.classify_output()
     if computer_choice == user_choice:
       print(f"The computer too chose {computer_choice}. No one wins this match!")
     elif computer_choice == "Rock":
@@ -118,7 +121,7 @@ def play_game(gesture_list):
   while round_number <= 3:
     game = Game(gesture_list)
     game.get_computer_choice(game.computer_choice)
-    print(game.computer_choice)
+    # print(game.computer_choice)
     game.get_prediction()
     # game.get_user_choice(game.user_choice)
     # game.classify_output()
