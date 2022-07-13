@@ -147,14 +147,14 @@ def play_game(gesture_list):
     #game.countdown()
     # print(game.computer_choice)
     print("\n --------------------------------------------------------")
-    print(f"ROUND NUMBER {round_number}.")
+    print(f"\n ************** ROUND NUMBER {round_number} **************")
     print("\n --------------------------------------------------------")
-    print("Prepare to show me your chosen gesture in 3 seconds!")
+    print("\nPrepare to show me your chosen gesture in 3 seconds!")
     time.sleep(3)
     print("Show me your hand NOW!")
     game.video_pause = time.time()
     game.get_prediction()
-    game.video_pause *= 10
+    game.video_pause *= 100
     print("Thanks!")
     # game.start_time = time.time()
     # game.show_time = time.time() * 2
@@ -171,8 +171,8 @@ def play_game(gesture_list):
       print(f"The user now has {user_lives} lives left.")
     round_number += 1
     # Press q to close the window
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-      break
+    # if cv2.waitKey(1) & 0xFF == ord('q'):
+    #  break
   # end-of-game if-statement
   # works fine
   if computer_lives == 0 or user_lives == 0:
