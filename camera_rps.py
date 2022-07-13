@@ -138,10 +138,7 @@ def play_game(gesture_list):
       print(f"The user now has {user_lives} lives left.")
     round_number += 1
     if computer_lives == 0 or user_lives == 0:
-      if computer_lives == 0:
-        print(game.spacer, "\n ****** GAME OVER! The user wins the game! ******", game.spacer, "\n")
-      elif user_lives == 0:
-        print(game.spacer, "\n ****** GAME OVER! The computer wins this game! ******", game.spacer, "\n")
+      print(game.spacer, f"\n ****** GAME OVER! The {winner} wins the game! ******", game.spacer, "\n")
   # After the loop release the cap object
   game.cap.release()
   # Destroy all the windows
