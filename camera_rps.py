@@ -56,7 +56,11 @@ class Game:
     # self.start_time = 0
     # self.seconds = 0
     # self.show_time = 0
-    self.video_pause = 0
+    # self.video_pause = 0
+    # self.round_number = 1
+
+    # layout miscellaneous prints
+    self.spacer = "\n --------------------------------------------------------"
 
   def get_computer_choice(self, computer_choice):
     # print(f"The computer choice is {computer_choice}")
@@ -65,6 +69,11 @@ class Game:
   # replaces get_user_choice()
   # do not change anything, it' projecting the video now
   def get_prediction(self):
+    # timer 
+    # start_time = time.time()
+    # countdown = start_time + 5
+    # end_time = start_time + 6
+    # while start_time <= end_time:
     ret, frame = self.cap.read()
     resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
     image_np = np.array(resized_frame)
@@ -77,6 +86,10 @@ class Game:
                                 (255, 255, 255), 2, cv2.LINE_4)
     cv2.imshow('frame', frame)
     # self.classify_output(prediction)
+    # if cv2.waitKey(1) & 0xFF == ord('c'):
+    #    continue
+    #  elif cv2.waitKey(1) & 0xFF == ord('q'):
+    #    break
     return prediction
 
   #def countdown(self):
@@ -136,6 +149,12 @@ class Game:
         print(f"\nThe computer chose {computer_choice}. The user wins this round!")
     return winner
 
+# def close_window():
+  # Press q to close the window
+#   while True:
+#     if cv2.waitKey(1) & 0xFF == ord('q'):
+#      break
+
 def play_game(gesture_list):
   round_number = 1
   computer_lives = 3
@@ -144,22 +163,23 @@ def play_game(gesture_list):
   game = Game(gesture_list)
   while computer_lives >= 1 and user_lives >= 1:
     game.get_computer_choice(game.computer_choice)
-    #game.countdown()
+    # game.countdown()
     # print(game.computer_choice)
-    print("\n --------------------------------------------------------")
+    print(game.spacer)
     print(f"\n ************** ROUND NUMBER {round_number} **************")
-    print("\n --------------------------------------------------------")
+    print(game.spacer)
     print("\nPrepare to show me your chosen gesture in 3 seconds!")
-    time.sleep(3)
+    # time.sleep(3)
     print("Show me your hand NOW!")
-    game.video_pause = time.time()
+    #game.video_pause = time.time()
     game.get_prediction()
-    game.video_pause *= 100
+    # game.video_pause *= 100
     print("Thanks!")
     # game.start_time = time.time()
     # game.show_time = time.time() * 2
     # game.get_user_choice(game.user_choice)
     # game.classify_output()
+    # Press q to close the window
     game.classify_output()
     print(f"The machine predicted that the user gesture was {game.user_prediction}")
     winner = game.get_winner(game.computer_choice, game.user_choice, game.winner)
@@ -173,15 +193,15 @@ def play_game(gesture_list):
     # Press q to close the window
     # if cv2.waitKey(1) & 0xFF == ord('q'):
     #  break
-  # end-of-game if-statement
-  # works fine
-  if computer_lives == 0 or user_lives == 0:
-    if computer_lives == 0:
-      print("\nGAME OVER! The user wins the game!")
-      print("\n --------------------------------------------------------\n")
-    elif user_lives == 0:
-      print("\nGAME OVER! The computer wins this game!")
-      print("\n --------------------------------------------------------\n")
+    # end-of-game if-statement
+    # works fine
+    if computer_lives == 0 or user_lives == 0:
+      if computer_lives == 0:
+        print("\nGAME OVER! The user wins the game!")
+        print("\n --------------------------------------------------------\n")
+      elif user_lives == 0:
+        print("\nGAME OVER! The computer wins this game!")
+        print("\n --------------------------------------------------------\n")
   # After the loop release the cap object
   game.cap.release()
   # Destroy all the windows
