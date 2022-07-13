@@ -75,20 +75,22 @@ class Game:
     cv2.imshow('frame', frame)
     return prediction
 
-  def counters(self):
+  def counter_1(self):
     countdown = 3
-    counter = 2
     print("\nPrepare to show me your chosen gesture in...")
     while countdown > 0:
       print(f'{countdown}')
       time.sleep(1)
       countdown -= 1
     print('\nShow your hand NOW!')
+
+  def counter_2(self):
+    counter = 2
     while counter > 0:
       time.sleep(1)
       print("...")
       counter -= 1
-    print("Gesture detected.\n")
+    # print("Gesture detected.\n")
   
   # gets gesture out of prediction
   def classify_output(self):
@@ -106,7 +108,7 @@ class Game:
     computer_choice = self.get_computer_choice(computer_choice)
     user_choice = self.classify_output()
     if computer_choice == user_choice:
-      print(f"\nThe computer too chose {computer_choice}. No one wins this round!")
+      print(f"\nThe computer too chose {computer_choice}. No one wins this round!\n")
     elif computer_choice == "Rock":
       if user_choice == "Paper":
         winner = self.user
@@ -135,16 +137,18 @@ def play_game(gesture_list):
   computer_lives = 3
   user_lives = 3
   game = Game(gesture_list)
-  print(game.spacer, f"\n ************** ROUND NUMBER {round_number} **************", game.spacer)
   while computer_lives >= 1 and user_lives >= 1:
+    print(game.spacer, f"\n ****************** ROUND NUMBER {round_number} ******************", game.spacer)
     game.get_computer_choice(game.computer_choice)
     # print("\nPrepare to show me your chosen gesture in 3 seconds!")
     # time.sleep(3)
     # print("Show me your hand NOW!")
+    game.counter_1()
     game.get_prediction()
-    game.counters()
+    game.counter_2()
     game.classify_output()
-    print(f"\nThe machine predicted that the user gesture was {game.user_prediction}.\n")
+    print(f"\nThe machine predicted that the user gesture was {game.user_prediction}.")
+    game.counter_2()
     winner = game.get_winner(game.computer_choice, game.user_choice, game.winner)
     if winner == "user":
       computer_lives -= 1
@@ -160,7 +164,7 @@ def play_game(gesture_list):
         print(f"The user now has only {user_lives} life left.\n")
     round_number += 1
     if computer_lives == 0 or user_lives == 0:
-      print(game.spacer, f"\n ****** GAME OVER! The {winner} wins the game! ******", game.spacer, "\n")
+      print(game.spacer, f"\n ********** GAME OVER! The {winner} wins the game! **********", game.spacer, "\n")
   # After the loop release the cap object
   game.cap.release()
   # Destroy all the windows
