@@ -52,12 +52,12 @@ class Game:
     self.computer = "computer"
     self.winner = str
     self.seconds = 0
+    self.round_number = 1
 
     # layout miscellaneous prints
     self.spacer = "\n --------------------------------------------------------"
 
   def get_computer_choice(self, computer_choice):
-    # print(f"The computer choice is {computer_choice}")
     return computer_choice
 
   # replaces get_user_choice()
@@ -90,7 +90,6 @@ class Game:
       time.sleep(1)
       print("...")
       counter -= 1
-    # print("Gesture detected.\n")
   
   # gets gesture out of prediction
   def classify_output(self):
@@ -138,11 +137,8 @@ def play_game(gesture_list):
   user_lives = 3
   game = Game(gesture_list)
   while computer_lives >= 1 and user_lives >= 1:
-    print(game.spacer, f"\n ****************** ROUND NUMBER {round_number} ******************", game.spacer)
+    print(game.spacer, f"\n ******************** ROUND NUMBER {round_number} ********************", game.spacer)
     game.get_computer_choice(game.computer_choice)
-    # print("\nPrepare to show me your chosen gesture in 3 seconds!")
-    # time.sleep(3)
-    # print("Show me your hand NOW!")
     game.counter_1()
     game.get_prediction()
     game.counter_2()
