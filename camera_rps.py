@@ -82,7 +82,7 @@ class Game:
       print(f'{countdown}')
       time.sleep(1)
       countdown -= 1
-    print('\nShow your hand NOW!')
+    print('\nShow your hand NOW!\n')
 
   def counter_2(self):
     counter = 2
