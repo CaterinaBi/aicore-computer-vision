@@ -49,10 +49,8 @@ class Game:
     self.instruction_message = "Press 'c' to continue, or 'q' to quit."
 
     self.user_choice = self.get_prediction()
-    self.computer_lives = 3
-    self.user_lives = 3
-    self.user = str
-    self.computer = str
+    self.user = "user"
+    self.computer = "computer"
     self.winner = str
     self.seconds = 0
     # self.start_time = 0
@@ -61,7 +59,7 @@ class Game:
     self.video_pause = 0
 
   def get_computer_choice(self, computer_choice):
-    print(f"The computer choice is {computer_choice}")
+    # print(f"The computer choice is {computer_choice}")
     return computer_choice
 
   # replaces get_user_choice()
@@ -101,53 +99,56 @@ class Game:
     prediction = self.get_prediction()
     choice_probability = {'Rock': prediction[0,1], 'Paper': prediction[0,2], 'Scissors': prediction[0,3]}
     self.user_prediction = max(choice_probability, key=choice_probability.get)
-    print(f"The machine predicted that the user gesture was {self.user_prediction}")
     return self.user_prediction
 
   # determines winner
-  def get_winner(self, computer_choice, user_choice, computer_lives, user_lives, winner):
+  def get_winner(self, computer_choice, user_choice, winner):
     computer_choice = self.get_computer_choice(computer_choice)
     user_choice = self.classify_output()
     if computer_choice == user_choice:
-      print(f"The computer too chose {computer_choice}. No one wins this round!")
+      print(f"\nThe computer too chose {computer_choice}. No one wins this round!")
     elif computer_choice == "Rock":
       if user_choice == "Paper":
         winner = self.user
-        computer_lives -= 1
-        print(f"The computer chose {computer_choice}. The user wins this round! The computer now has {computer_lives} lives left.")
+        #computer_lives -= 1
+        print(f"\nThe computer chose {computer_choice}. The user wins this round!")
       elif user_choice == "Scissors":
         winner = self.computer
-        user_lives -= 1
-        print(f"The computer chose {computer_choice}. The computer wins this round! The user now has {user_lives} lives left.")
+        #user_lives -= 1
+        print(f"\nThe computer chose {computer_choice}. The computer wins this round!")
     elif computer_choice == "Paper":
       if user_choice == "Rock":
         winner = self.computer
-        user_lives -= 1
-        print(f"The computer chose {computer_choice}. The computer wins this round! The user now has {user_lives} lives left.")
+        #user_lives -= 1
+        print(f"\nThe computer chose {computer_choice}. The computer wins this round!")
       elif user_choice == "Scissors":
         winner = self.user
-        computer_lives -= 1
-        print(f"The computer chose {computer_choice}. The user wins this round! The computer now has {computer_lives} lives left.")
+        #computer_lives -= 1
+        print(f"\nThe computer chose {computer_choice}. The user wins this round!")
     else:
       if user_choice == "Paper":
         winner = self.computer
-        user_lives -= 1
-        print(f"The computer chose {computer_choice}. The computer wins this round! The user now has {user_lives} lives left.")
+        #user_lives -= 1
+        print(f"\nThe computer chose {computer_choice}. The computer wins this round!")
       elif user_choice == "Rock":
         winner = self.user
-        computer_lives -= 1
-        print(f"The computer chose {computer_choice}. The user wins this round! The computer now has {computer_lives} lives left.")
+        #computer_lives -= 1
+        print(f"\nThe computer chose {computer_choice}. The user wins this round!")
     return winner
 
 def play_game(gesture_list):
   round_number = 1
+  computer_lives = 3
+  user_lives = 3
   # working like a charm, now camera stops after three rounds
-  print(f"Round number {round_number}.")
   game = Game(gesture_list)
-  while game.computer_lives >= 1 and game.user_lives >= 1:
+  while computer_lives >= 1 and user_lives >= 1:
     game.get_computer_choice(game.computer_choice)
     #game.countdown()
     # print(game.computer_choice)
+    print("\n --------------------------------------------------------")
+    print(f"ROUND NUMBER {round_number}.")
+    print("\n --------------------------------------------------------")
     print("Prepare to show me your chosen gesture in 3 seconds!")
     time.sleep(3)
     print("Show me your hand NOW!")
@@ -160,15 +161,27 @@ def play_game(gesture_list):
     # game.get_user_choice(game.user_choice)
     # game.classify_output()
     game.classify_output()
-    game.get_winner(game.computer_choice, game.user_choice, game.computer_lives, game.user_lives, game.winner)
-    if game.winner == game.user:
-      game.user_lives -= 1
-    elif game.winner == game.computer:
-      game.computer_lives -=1
+    print(f"The machine predicted that the user gesture was {game.user_prediction}")
+    winner = game.get_winner(game.computer_choice, game.user_choice, game.winner)
+    if winner == "user":
+      computer_lives -= 1
+      print(f"The computer now has {computer_lives} lives left.")
+    elif winner == "computer":
+      user_lives -=1
+      print(f"The user now has {user_lives} lives left.")
     round_number += 1
     # Press q to close the window
     if cv2.waitKey(1) & 0xFF == ord('q'):
       break
+  # end-of-game if-statement
+  # works fine
+  if computer_lives == 0 or user_lives == 0:
+    if computer_lives == 0:
+      print("\nGAME OVER! The user wins the game!")
+      print("\n --------------------------------------------------------\n")
+    elif user_lives == 0:
+      print("\nGAME OVER! The computer wins this game!")
+      print("\n --------------------------------------------------------\n")
   # After the loop release the cap object
   game.cap.release()
   # Destroy all the windows
