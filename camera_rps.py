@@ -122,9 +122,7 @@ def play_game(gesture_list):
   game = Game(gesture_list)
   while computer_lives >= 1 and user_lives >= 1:
     game.get_computer_choice(game.computer_choice)
-    print(game.spacer)
-    print(f"\n ************** ROUND NUMBER {round_number} **************")
-    print(game.spacer)
+    print(game.spacer, f"\n ************** ROUND NUMBER {round_number} **************", game.spacer)
     print("\nPrepare to show me your chosen gesture in 3 seconds!")
     print("Show me your hand NOW!")
     game.get_prediction()
@@ -141,11 +139,9 @@ def play_game(gesture_list):
     round_number += 1
     if computer_lives == 0 or user_lives == 0:
       if computer_lives == 0:
-        print("\nGAME OVER! The user wins the game!")
-        print("\n --------------------------------------------------------\n")
+        print(game.spacer, "\n ****** GAME OVER! The user wins the game! ******", game.spacer, "\n")
       elif user_lives == 0:
-        print("\nGAME OVER! The computer wins this game!")
-        print("\n --------------------------------------------------------\n")
+        print(game.spacer, "\n ****** GAME OVER! The computer wins this game! ******", game.spacer, "\n")
   # After the loop release the cap object
   game.cap.release()
   # Destroy all the windows
