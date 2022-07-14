@@ -133,12 +133,12 @@ class Game:
     return winner
 
 def play_game(gesture_list):
-  round_number = 1
+  # round_number = 1
   computer_lives = 3
   user_lives = 3
   game = Game(gesture_list)
   while computer_lives >= 1 and user_lives >= 1:
-    print(game.spacer, f"\n ******************** ROUND NUMBER {round_number} ********************", game.spacer)
+    print(game.spacer, f"\n ******************** ROUND NUMBER {game.round_number} ********************", game.spacer)
     game.get_computer_choice(game.computer_choice)
     game.counter_1()
     # game.get_prediction() # not called here, already called within classify_output()
@@ -159,7 +159,7 @@ def play_game(gesture_list):
         print(f"The user now has {user_lives} lives left.\n")
       elif user_lives == 1:
         print(f"The user now has only {user_lives} life left.\n")
-    round_number += 1
+    game.round_number += 1
     if computer_lives == 0 or user_lives == 0:
       print(game.spacer, f"\n ********** GAME OVER! The {winner} wins the game! **********", game.spacer, "\n")
   # After the loop release the cap object
