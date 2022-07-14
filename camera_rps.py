@@ -4,36 +4,45 @@ import numpy as np
 import random
 import time
 '''
-    NEEDS UPDATING
     A game of Rock, Paper, Scissors in which the user plays against the computer.
     The user inputs their chosen gesture using the camera.
     The computer chooses its move randomly from a pre-determined list.
 
-    Parameters:
-    ----------
-    gesture_list: list
-        List of gestures to be used in the game
-
     Attributes:
     ----------
-    computer_choice: str
-        The gesture to be played by the computer, picked randomly from gesture_list
-    user_choice: str
-        The gesture played by the user (input)
-    winner: str
-        The winner of the match/game
+    model: load_model('keras_model.h5')
+        Loads computer vision model used in the application.
+    cap: cv2.VideoCapture(0)
+        Video capture constructor for opencv.
+    data: array of tuples
+        The model's probabilities for each element of gesture_list.
+    user: str
+        Attributes the name "user" to the user.
+    computer: str 
+        Attributes the name "computer" to the computer.
+    round_number: int
+        Used to calculate the round number. Starts at 1 by default.
+    computer_lives: int
+        Number of lives left for the computer. Fixed at 3 by default.
+    user_lives: int
+        Number of lives left for the user. Fixed at 3 by default.
+    spacer: str
+        String that prints out a separator to make the application's output clearer.
 
     Methods:
     -------
-    get_computer_choice(computer_choice)
-        Gets the computer's input.
-    get_user_choice(user_choice)
-        Gets the user's input.
-    get_winner(computer_choice, user_choice, winner)
+    get_computer_choice()
+        Gets the computer's input randomly from gesture_list.
+    get_prediction()
+        Understands the user's input using probability.
+    classify_output()
+        Uses the list of probabilities from get_prediction() to determine the image inputted in the camera.
+    get_winner()
         Returns the name of the winner.
-    classify_output():
-    Uses the list of probabilities output from get_prediction
-    to determine the image inputted in the camera.
+    count_lives()
+        Keep track of the number of remaining lives for each user.
+    counter_1(), counter_2()
+        Slow down the machine to make the application accessible for the user.
     '''
 class Game:
   def __init__(self):
@@ -63,23 +72,6 @@ class Game:
     prediction = self.model.predict(self.data)
     cv2.imshow('frame', frame)
     return prediction
-
-  def counter_1(self):
-    countdown = 3
-    print("\nPrepare to show me your chosen gesture in...")
-    while countdown > 0:
-      print(f'{countdown}')
-      cv2.waitKey(1000)
-      countdown -= 1
-    print('\nShow your hand NOW!')
-    self.counter_2()
-
-  def counter_2(self):
-    counter = 2
-    while counter > 0:
-      cv2.waitKey(1000)
-      print("...")
-      counter -= 1
   
   def classify_output(self):
     prediction = self.get_prediction()
@@ -135,6 +127,23 @@ class Game:
     # game over message
     if self.computer_lives == 0 or self.user_lives == 0:
       print(self.spacer, f"\n ******** GAME OVER! The {winner} wins the game! ********", self.spacer, "\n")
+
+  def counter_1(self):
+    countdown = 3
+    print("\nPrepare to show me your chosen gesture in...")
+    while countdown > 0:
+      print(f'{countdown}')
+      cv2.waitKey(1000)
+      countdown -= 1
+    print('\nShow your hand NOW!')
+    self.counter_2()
+
+  def counter_2(self):
+    counter = 2
+    while counter > 0:
+      cv2.waitKey(1000)
+      print("...")
+      counter -= 1
 
 def play_game():
   game = Game()
