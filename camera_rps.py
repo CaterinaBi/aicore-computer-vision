@@ -40,12 +40,15 @@ class Game:
     self.model = load_model('keras_model.h5')
     self.cap = cv2.VideoCapture(0)
     self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
+    self.normalized_image = 0 # Normalize the image
 
     # font to be used in text messages
     self.font = cv2.FONT_HERSHEY_SIMPLEX
     # messages to be displayed
     self.intro_message = "WELCOME TO THE GAME OF ROCK, PAPER, SCISSORS!"
     self.instruction_message = "Press 'c' to continue, or 'q' to quit."
+    # cv2.putText(frame, self.intro_message, (300, 600), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
+    # cv2.putText(frame, self.instruction_message, (300, 640), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
 
     self.user_choice = self.get_prediction()
     self.user = "user"
@@ -64,18 +67,33 @@ class Game:
     return computer_choice
 
   # replaces get_user_choice()
-  def get_prediction(self):
+  # def get_prediction(self):
+    # ret, frame = self.cap.read()
+    # resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
+    # image_np = np.array(resized_frame)
+    # normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
+    # self.data[0] = normalized_image
+    # prediction = self.model.predict(self.data)
+    # cv2.putText(frame, self.intro_message, (300, 600), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
+    # cv2.putText(frame, self.instruction_message, (300, 640), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
+    # cv2.imshow('frame', frame)
+    # return prediction
+
+  def display_frame(self):
     ret, frame = self.cap.read()
     resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
     image_np = np.array(resized_frame)
     normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
-    self.data[0] = normalized_image
-    prediction = self.model.predict(self.data)
-    cv2.putText(frame, self.intro_message, (300, 600), self.font, 1, 
-                                (255, 255, 255), 2, cv2.LINE_4)
-    cv2.putText(frame, self.instruction_message, (300, 640), self.font, 1,
-                                (255, 255, 255), 2, cv2.LINE_4)
+    cv2.putText(frame, self.intro_message, (300, 600), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
+    cv2.putText(frame, self.instruction_message, (300, 640), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
     cv2.imshow('frame', frame)
+    return frame 
+
+  # replaces get_user_choice()
+  def get_prediction(self):
+    self.display_frame()
+    self.data[0] = self.normalized_image
+    prediction = self.model.predict(self.data)
     return prediction
 
   def counter_1(self):
