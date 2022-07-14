@@ -6,7 +6,7 @@ import time
 '''
     NEEDS UPDATING
     A game of Rock, Paper, Scissors in which the user plays against the computer.
-    The user inputs their chosen gesture in writing.
+    The user inputs their chosen gesture using the camera.
     The computer chooses its move randomly from a pre-determined list.
 
     Parameters:
@@ -31,32 +31,22 @@ import time
         Gets the user's input.
     get_winner(computer_choice, user_choice, winner)
         Returns the name of the winner.
+    classify_output():
+    Uses the list of probabilities output from get_prediction
+    to determine the image inputted in the camera.
     '''
 class Game:
   def __init__(self):
-    # self.computer_choice = str
-
     # model, video and data attributes
     self.model = load_model('keras_model.h5')
     self.cap = cv2.VideoCapture(0)
     self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
-    # self.normalized_image = 0 # Normalize the image
-
-    # font to be used in text messages
-    # self.font = cv2.FONT_HERSHEY_SIMPLEX
-    # messages to be displayed
-    # self.intro_message = ""
-    # self.instruction_message = ""
-
-    # self.user_choice = self.get_prediction()
+    # users attributes
     self.user = "user"
     self.computer = "computer"
-    # self.seconds = 0
     self.round_number = 1
     self.computer_lives = 3
     self.user_lives = 3
-    # self.waitKey = 0
-
     # layout miscellaneous prints
     self.spacer = "\n --------------------------------------------------------"
 
@@ -71,8 +61,6 @@ class Game:
     normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
     self.data[0] = normalized_image
     prediction = self.model.predict(self.data)
-    # cv2.putText(frame, self.intro_message, (300, 600), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
-    # cv2.putText(frame, self.instruction_message, (300, 640), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
     cv2.imshow('frame', frame)
     return prediction
 
@@ -93,19 +81,13 @@ class Game:
       print("...")
       counter -= 1
   
-  # gets gesture out of prediction
   def classify_output(self):
-    """
-    Uses the list of probabilities output from get_prediction
-    to determine the image inputted in the camera.
-    """
     prediction = self.get_prediction()
     choice_probability = {'Rock': prediction[0,1], 'Paper': prediction[0,2], 'Scissors': prediction[0,3]}
     self.user_prediction = max(choice_probability, key=choice_probability.get)
     print(f"\nThe machine predicted that the user gesture was {self.user_prediction}.")
     return self.user_prediction
 
-  # determines winner
   def get_winner(self):
     winner = str
     computer_choice = self.get_computer_choice()
@@ -155,17 +137,12 @@ class Game:
       print(self.spacer, f"\n ******** GAME OVER! The {winner} wins the game! ********", self.spacer, "\n")
 
 def play_game():
-  # round_number = 1
   game = Game()
   while game.computer_lives >= 1 and game.user_lives >= 1:
-    # elif cv2.waitKey(10000) & 0xFF == ord('c'):
-    # game.intro_message = "WELCOME TO THE GAME OF ROCK, PAPER, SCISSORS!"
-    # game.instruction_message = "Press 'c' to continue, or 'q' to quit."
     print(game.spacer, f"\n ******************** ROUND NUMBER {game.round_number} ********************", game.spacer)
     print("\nPress 'c' to continue, or 'q' to quit.")
     game.get_computer_choice()
     game.counter_1()
-    # game.get_prediction() # already called within classify_output()
     game.count_lives()
     game.round_number += 1
     # Press q to close the window
