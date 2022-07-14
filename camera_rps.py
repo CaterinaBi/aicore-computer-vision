@@ -56,6 +56,7 @@ class Game:
     self.round_number = 1
     self.computer_lives = 3
     self.user_lives = 3
+    # self.waitKey = 0
 
     # layout miscellaneous prints
     self.spacer = "\n --------------------------------------------------------"
@@ -81,7 +82,7 @@ class Game:
     print("\nPrepare to show me your chosen gesture in...")
     while countdown > 0:
       print(f'{countdown}')
-      time.sleep(1)
+      cv2.waitKey(1000)
       countdown -= 1
     print('\nShow your hand NOW!')
     self.counter_2()
@@ -89,7 +90,7 @@ class Game:
   def counter_2(self):
     counter = 2
     while counter > 0:
-      time.sleep(1)
+      cv2.waitKey(1000)
       print("...")
       counter -= 1
   
