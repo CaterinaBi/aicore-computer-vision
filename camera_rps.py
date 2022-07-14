@@ -45,10 +45,8 @@ class Game:
     # font to be used in text messages
     self.font = cv2.FONT_HERSHEY_SIMPLEX
     # messages to be displayed
-    self.intro_message = "WELCOME TO THE GAME OF ROCK, PAPER, SCISSORS!"
-    self.instruction_message = "Press 'c' to continue, or 'q' to quit."
-    # cv2.putText(frame, self.intro_message, (300, 600), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
-    # cv2.putText(frame, self.instruction_message, (300, 640), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
+    self.intro_message = ""
+    self.instruction_message = ""
 
     self.user_choice = self.get_prediction()
     self.user = "user"
@@ -86,8 +84,7 @@ class Game:
     normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
     cv2.putText(frame, self.intro_message, (300, 600), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
     cv2.putText(frame, self.instruction_message, (300, 640), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
-    cv2.imshow('frame', frame)
-    return frame 
+    cv2.imshow('frame', frame) 
 
   # replaces get_user_choice()
   def get_prediction(self):
@@ -104,6 +101,7 @@ class Game:
       time.sleep(1)
       countdown -= 1
     print('\nShow your hand NOW!')
+    self.counter_2()
 
   def counter_2(self):
     counter = 2
@@ -129,7 +127,7 @@ class Game:
     computer_choice = self.get_computer_choice(computer_choice)
     user_choice = self.classify_output()
     if computer_choice == user_choice:
-      print(f"\nThe computer too chose {computer_choice}. No one wins this round!\n")
+      print(f"\nThe computer too chose {computer_choice}. No one wins this round!")
     elif computer_choice == "Rock":
       if user_choice == "Paper":
         winner = self.user
@@ -159,15 +157,15 @@ class Game:
     if winner == "user":
       self.computer_lives -= 1
       if self.computer_lives == 2 or self.computer_lives == 0:
-        print(f"The computer now has {self.computer_lives} lives left.\n")
+        print(f"The computer now has {self.computer_lives} lives left.")
       elif self.computer_lives == 1:
-        print(f"The computer now has only {self.computer_lives} life left.\n")
+        print(f"The computer now has only {self.computer_lives} life left.")
     elif winner == "computer":
       self.user_lives -=1
       if self.user_lives == 2 or self.user_lives == 0:
-        print(f"The user now has {self.user_lives} lives left.\n")
+        print(f"The user now has {self.user_lives} lives left.")
       elif self.user_lives == 1:
-        print(f"The user now has only {self.user_lives} life left.\n")
+        print(f"The user now has only {self.user_lives} life left.")
     # game over message
     if self.computer_lives == 0 or self.user_lives == 0:
       print(self.spacer, f"\n ********** GAME OVER! The {winner} wins the game! **********", self.spacer, "\n")
@@ -175,6 +173,8 @@ class Game:
 def play_game(gesture_list):
   # round_number = 1
   game = Game(gesture_list)
+  game.intro_message = "WELCOME TO THE GAME OF ROCK, PAPER, SCISSORS!"
+  game.instruction_message = "Press 'c' to continue, or 'q' to quit."
   while game.computer_lives >= 1 and game.user_lives >= 1:
     print(game.spacer, f"\n ******************** ROUND NUMBER {game.round_number} ********************", game.spacer)
     game.get_computer_choice(game.computer_choice)
@@ -183,7 +183,7 @@ def play_game(gesture_list):
     # game.counter_2()
     # game.classify_output() # already called within get_winner() # now within get_lives
     game.count_lives()
-    game.counter_2()
+    # game.counter_2() # moved within count_lives()
     # round number here
     game.round_number += 1
   # After the loop release the cap object
