@@ -64,19 +64,6 @@ class Game:
     self.computer_choice = random.choice(gesture_list)
     return computer_choice
 
-  # replaces get_user_choice()
-  # def get_prediction(self):
-    # ret, frame = self.cap.read()
-    # resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
-    # image_np = np.array(resized_frame)
-    # normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
-    # self.data[0] = normalized_image
-    # prediction = self.model.predict(self.data)
-    # cv2.putText(frame, self.intro_message, (300, 600), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
-    # cv2.putText(frame, self.instruction_message, (300, 640), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
-    # cv2.imshow('frame', frame)
-    # return prediction
-
   def get_prediction(self):
     ret, frame = self.cap.read()
     resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
@@ -169,19 +156,14 @@ class Game:
 def play_game():
   # round_number = 1
   game = Game()
-  game.intro_message = "WELCOME TO THE GAME OF ROCK, PAPER, SCISSORS!"
-  game.instruction_message = "Press 'c' to continue, or 'q' to quit."
   while game.computer_lives >= 1 and game.user_lives >= 1:
+    # game.intro_message = "WELCOME TO THE GAME OF ROCK, PAPER, SCISSORS!"
+    # game.instruction_message = "Press 'c' to continue, or 'q' to quit."
     print(game.spacer, f"\n ******************** ROUND NUMBER {game.round_number} ********************", game.spacer)
     game.get_computer_choice(game.computer_choice)
     game.counter_1()
-    # game.display_frame()
-    game.get_prediction() # not called here, already called within classify_output()
-    # game.counter_2()
-    # game.classify_output() # already called within get_winner() # now within get_lives
+    # game.get_prediction() # already called within classify_output()
     game.count_lives()
-    # game.counter_2() # moved within count_lives()
-    # round number here
     game.round_number += 1
   # After the loop release the cap object
   game.cap.release()
