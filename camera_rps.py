@@ -53,6 +53,8 @@ class Game:
     self.winner = str
     self.seconds = 0
     self.round_number = 1
+    self.computer_lives = 3
+    self.user_lives = 3
 
     # layout miscellaneous prints
     self.spacer = "\n --------------------------------------------------------"
@@ -132,36 +134,39 @@ class Game:
         print(f"\nThe computer chose {computer_choice}. The user wins this round!")
     return winner
 
+  def count_lives(self):
+    winner = self.get_winner(self.computer_choice, self.user_choice, self.winner)
+    self.counter_2()
+    if winner == "user":
+      self.computer_lives -= 1
+      if self.computer_lives == 2 or self.computer_lives == 0:
+        print(f"The computer now has {self.computer_lives} lives left.\n")
+      elif self.computer_lives == 1:
+        print(f"The computer now has only {self.computer_lives} life left.\n")
+    elif winner == "computer":
+      self.user_lives -=1
+      if self.user_lives == 2 or self.user_lives == 0:
+        print(f"The user now has {self.user_lives} lives left.\n")
+      elif self.user_lives == 1:
+        print(f"The user now has only {self.user_lives} life left.\n")
+    # game over message
+    if self.computer_lives == 0 or self.user_lives == 0:
+      print(self.spacer, f"\n ********** GAME OVER! The {winner} wins the game! **********", self.spacer, "\n")
+
 def play_game(gesture_list):
   # round_number = 1
-  computer_lives = 3
-  user_lives = 3
   game = Game(gesture_list)
-  while computer_lives >= 1 and user_lives >= 1:
+  while game.computer_lives >= 1 and game.user_lives >= 1:
     print(game.spacer, f"\n ******************** ROUND NUMBER {game.round_number} ********************", game.spacer)
     game.get_computer_choice(game.computer_choice)
     game.counter_1()
     # game.get_prediction() # not called here, already called within classify_output()
     # game.counter_2()
-    # game.classify_output() # already called within get_winner()
+    # game.classify_output() # already called within get_winner() # now within get_lives
+    game.count_lives()
     game.counter_2()
-    winner = game.get_winner(game.computer_choice, game.user_choice, game.winner)
-    game.counter_2()
-    if winner == "user":
-      computer_lives -= 1
-      if computer_lives == 2 or computer_lives == 0:
-        print(f"The computer now has {computer_lives} lives left.\n")
-      elif computer_lives == 1:
-        print(f"The computer now has only {computer_lives} life left.\n")
-    elif winner == "computer":
-      user_lives -=1
-      if user_lives == 2 or user_lives == 0:
-        print(f"The user now has {user_lives} lives left.\n")
-      elif user_lives == 1:
-        print(f"The user now has only {user_lives} life left.\n")
+    # round number here
     game.round_number += 1
-    if computer_lives == 0 or user_lives == 0:
-      print(game.spacer, f"\n ********** GAME OVER! The {winner} wins the game! **********", game.spacer, "\n")
   # After the loop release the cap object
   game.cap.release()
   # Destroy all the windows
