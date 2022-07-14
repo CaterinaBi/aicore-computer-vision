@@ -2,7 +2,6 @@ import cv2
 from keras.models import load_model
 import numpy as np
 import random
-import time
 '''
     A game of Rock, Paper, Scissors in which the user plays against the computer.
     The user inputs their chosen gesture using the camera.
