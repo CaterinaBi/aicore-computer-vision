@@ -171,3 +171,13 @@ elif computer_choice == "Rock":
 ```
 
 The method `get_winner()` returns the name of the winner.
+
+# Creation of the camera version
+
+## From `get_user_gesture()` to `get_prediction()`
+
+## Additional methods and their fonctionalities
+
+## Improvements in the overall structure
+
+# Bonus features
