@@ -82,7 +82,7 @@ class Game:
       print(f'{countdown}')
       time.sleep(1)
       countdown -= 1
-    print('\nShow your hand NOW!\n')
+    print('\nShow your hand NOW!')
 
   def counter_2(self):
     counter = 2
@@ -100,6 +100,7 @@ class Game:
     prediction = self.get_prediction()
     choice_probability = {'Rock': prediction[0,1], 'Paper': prediction[0,2], 'Scissors': prediction[0,3]}
     self.user_prediction = max(choice_probability, key=choice_probability.get)
+    print(f"\nThe machine predicted that the user gesture was {self.user_prediction}.")
     return self.user_prediction
 
   # determines winner
@@ -140,12 +141,12 @@ def play_game(gesture_list):
     print(game.spacer, f"\n ******************** ROUND NUMBER {round_number} ********************", game.spacer)
     game.get_computer_choice(game.computer_choice)
     game.counter_1()
-    game.get_prediction()
-    game.counter_2()
-    game.classify_output()
-    print(f"\nThe machine predicted that the user gesture was {game.user_prediction}.")
+    # game.get_prediction() # not called here, already called within classify_output()
+    # game.counter_2()
+    # game.classify_output() # already called within get_winner()
     game.counter_2()
     winner = game.get_winner(game.computer_choice, game.user_choice, game.winner)
+    game.counter_2()
     if winner == "user":
       computer_lives -= 1
       if computer_lives == 2 or computer_lives == 0:
