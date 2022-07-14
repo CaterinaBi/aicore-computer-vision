@@ -47,7 +47,7 @@ class Game:
     self.round_number = 1
     self.computer_lives = 3
     self.user_lives = 3
-    # layout miscellaneous prints
+    # layout print
     self.spacer = "\n --------------------------------------------------------"
 
   def get_computer_choice(self):
