@@ -34,7 +34,7 @@ import time
     '''
 class Game:
   def __init__(self):
-    self.computer_choice = str
+    # self.computer_choice = str
 
     # model, video and data attributes
     self.model = load_model('keras_model.h5')
@@ -48,10 +48,9 @@ class Game:
     # self.intro_message = ""
     # self.instruction_message = ""
 
-    self.user_choice = self.get_prediction()
+    # self.user_choice = self.get_prediction()
     self.user = "user"
     self.computer = "computer"
-    self.winner = str
     # self.seconds = 0
     self.round_number = 1
     self.computer_lives = 3
@@ -61,8 +60,8 @@ class Game:
     # layout miscellaneous prints
     self.spacer = "\n --------------------------------------------------------"
 
-  def get_computer_choice(self, computer_choice):
-    self.computer_choice = random.choice(gesture_list)
+  def get_computer_choice(self):
+    computer_choice = random.choice(gesture_list)
     return computer_choice
 
   def get_prediction(self):
@@ -107,8 +106,9 @@ class Game:
     return self.user_prediction
 
   # determines winner
-  def get_winner(self, computer_choice, user_choice, winner):
-    computer_choice = self.get_computer_choice(computer_choice)
+  def get_winner(self):
+    winner = str
+    computer_choice = self.get_computer_choice()
     user_choice = self.classify_output()
     if computer_choice == user_choice:
       print(f"\nThe computer too chose {computer_choice}. No one wins this round!")
@@ -136,7 +136,7 @@ class Game:
     return winner
 
   def count_lives(self):
-    winner = self.get_winner(self.computer_choice, self.user_choice, self.winner)
+    winner = self.get_winner()
     self.counter_2()
     if winner == "user":
       self.computer_lives -= 1
@@ -163,7 +163,7 @@ def play_game():
     # game.instruction_message = "Press 'c' to continue, or 'q' to quit."
     print(game.spacer, f"\n ******************** ROUND NUMBER {game.round_number} ********************", game.spacer)
     print("\nPress 'c' to continue, or 'q' to quit.")
-    game.get_computer_choice(game.computer_choice)
+    game.get_computer_choice()
     game.counter_1()
     # game.get_prediction() # already called within classify_output()
     game.count_lives()

@@ -43,16 +43,16 @@ class Game:
     # self.normalized_image = 0 # Normalize the image
 
     # font to be used in text messages
-    self.font = cv2.FONT_HERSHEY_SIMPLEX
+    # self.font = cv2.FONT_HERSHEY_SIMPLEX
     # messages to be displayed
-    self.intro_message = ""
-    self.instruction_message = ""
+    # self.intro_message = ""
+    # self.instruction_message = ""
 
     self.user_choice = self.get_prediction()
     self.user = "user"
     self.computer = "computer"
     self.winner = str
-    self.seconds = 0
+    # self.seconds = 0
     self.round_number = 1
     self.computer_lives = 3
     self.user_lives = 3
@@ -72,8 +72,8 @@ class Game:
     normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
     self.data[0] = normalized_image
     prediction = self.model.predict(self.data)
-    cv2.putText(frame, self.intro_message, (300, 600), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
-    cv2.putText(frame, self.instruction_message, (300, 640), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
+    # cv2.putText(frame, self.intro_message, (300, 600), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
+    # cv2.putText(frame, self.instruction_message, (300, 640), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
     cv2.imshow('frame', frame)
     return prediction
 
@@ -158,18 +158,23 @@ def play_game():
   # round_number = 1
   game = Game()
   while game.computer_lives >= 1 and game.user_lives >= 1:
-    game.intro_message = "WELCOME TO THE GAME OF ROCK, PAPER, SCISSORS!"
-    game.instruction_message = "Press 'c' to continue, or 'q' to quit."
+    # elif cv2.waitKey(10000) & 0xFF == ord('c'):
+    # game.intro_message = "WELCOME TO THE GAME OF ROCK, PAPER, SCISSORS!"
+    # game.instruction_message = "Press 'c' to continue, or 'q' to quit."
     print(game.spacer, f"\n ******************** ROUND NUMBER {game.round_number} ********************", game.spacer)
+    print("\nPress 'c' to continue, or 'q' to quit.")
     game.get_computer_choice(game.computer_choice)
     game.counter_1()
     # game.get_prediction() # already called within classify_output()
     game.count_lives()
     game.round_number += 1
+    # Press q to close the window
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+        break
   # After the loop release the cap object
   game.cap.release()
   # Destroy all the windows
-  game.cv2.destroyAllWindows()
+  cv2.destroyAllWindows()
 
 if __name__ == '__main__':
   gesture_list = ["Rock", "Paper", "Scissors"]
