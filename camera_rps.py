@@ -34,7 +34,7 @@ import time
     '''
 class Game:
   def __init__(self, gesture_list):
-    self.computer_choice = random.choice(gesture_list)
+    self.computer_choice = str
 
     # model, video and data attributes
     self.model = load_model('keras_model.h5')
@@ -60,6 +60,7 @@ class Game:
     self.spacer = "\n --------------------------------------------------------"
 
   def get_computer_choice(self, computer_choice):
+    self.computer_choice = random.choice(gesture_list)
     return computer_choice
 
   # replaces get_user_choice()
