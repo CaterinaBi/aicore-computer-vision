@@ -33,14 +33,14 @@ import time
         Returns the name of the winner.
     '''
 class Game:
-  def __init__(self, gesture_list):
+  def __init__(self):
     self.computer_choice = str
 
     # model, video and data attributes
     self.model = load_model('keras_model.h5')
     self.cap = cv2.VideoCapture(0)
     self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
-    self.normalized_image = 0 # Normalize the image
+    # self.normalized_image = 0 # Normalize the image
 
     # font to be used in text messages
     self.font = cv2.FONT_HERSHEY_SIMPLEX
@@ -77,20 +77,16 @@ class Game:
     # cv2.imshow('frame', frame)
     # return prediction
 
-  def display_frame(self):
+  def get_prediction(self):
     ret, frame = self.cap.read()
     resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
     image_np = np.array(resized_frame)
     normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
+    self.data[0] = normalized_image
+    prediction = self.model.predict(self.data)
     cv2.putText(frame, self.intro_message, (300, 600), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
     cv2.putText(frame, self.instruction_message, (300, 640), self.font, 1,(255, 255, 255), 2, cv2.LINE_4)
-    cv2.imshow('frame', frame) 
-
-  # replaces get_user_choice()
-  def get_prediction(self):
-    self.display_frame()
-    self.data[0] = self.normalized_image
-    prediction = self.model.predict(self.data)
+    cv2.imshow('frame', frame)
     return prediction
 
   def counter_1(self):
@@ -168,18 +164,19 @@ class Game:
         print(f"The user now has only {self.user_lives} life left.")
     # game over message
     if self.computer_lives == 0 or self.user_lives == 0:
-      print(self.spacer, f"\n ********** GAME OVER! The {winner} wins the game! **********", self.spacer, "\n")
+      print(self.spacer, f"\n ******** GAME OVER! The {winner} wins the game! ********", self.spacer, "\n")
 
-def play_game(gesture_list):
+def play_game():
   # round_number = 1
-  game = Game(gesture_list)
+  game = Game()
   game.intro_message = "WELCOME TO THE GAME OF ROCK, PAPER, SCISSORS!"
   game.instruction_message = "Press 'c' to continue, or 'q' to quit."
   while game.computer_lives >= 1 and game.user_lives >= 1:
     print(game.spacer, f"\n ******************** ROUND NUMBER {game.round_number} ********************", game.spacer)
     game.get_computer_choice(game.computer_choice)
     game.counter_1()
-    # game.get_prediction() # not called here, already called within classify_output()
+    # game.display_frame()
+    game.get_prediction() # not called here, already called within classify_output()
     # game.counter_2()
     # game.classify_output() # already called within get_winner() # now within get_lives
     game.count_lives()
@@ -193,5 +190,5 @@ def play_game(gesture_list):
 
 if __name__ == '__main__':
   gesture_list = ["Rock", "Paper", "Scissors"]
-  play_game(gesture_list)
+  play_game()
 # %%
