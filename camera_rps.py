@@ -149,6 +149,7 @@ def play_game():
   while game.computer_lives >= 1 and game.user_lives >= 1:
     print(game.spacer, f"\n ******************** ROUND NUMBER {game.round_number} ********************", game.spacer)
     print("\nPress 'c' to continue, or 'q' to quit.")
+    game.get_prediction()
     game.get_computer_choice()
     game.counter_1()
     game.count_lives()
