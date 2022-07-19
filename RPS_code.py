@@ -53,6 +53,9 @@ class Game:
         self.winner = str
         self.seconds = 0
 
+        self.computer_lives = 3
+        self.user_lives = 3
+
         # layout miscellaneous prints
         self.spacer = "\n --------------------------------------------------------"
 
@@ -126,13 +129,23 @@ class Game:
             cv2.waitKey(1000)
             countdown -= 1
         print('\nShow your hand NOW!')
+        cv2.waitKey(1000)
+
+    def remaining_lives(self):
+        winner = self.get_winner(self.computer_choice, self.user_choice, self.winner)
+        if winner == "user":
+            self.computer_lives -= 1
+            print(f"The computer now has {self.computer_lives} lives left.")
+        elif winner == "computer":
+            self.user_lives -=1
+            print(f"The user now has {self.user_lives} lives left.")
+        if self.computer_lives == 0 or self.user_lives == 0:
+            print(self.spacer, f"\n ****** GAME OVER! The {winner} wins the game! ******", self.spacer, "\n")
 
 def play_game(gesture_list):
   round_number = 1
-  computer_lives = 3
-  user_lives = 3
   game = Game(gesture_list)
-  while computer_lives >= 1 and user_lives >= 1:
+  while game.computer_lives >= 1 and game.user_lives >= 1:
     game.get_computer_choice(game.computer_choice)
     game.get_camera()
     print(game.spacer, f"\n ************** ROUND NUMBER {round_number} **************", game.spacer)
@@ -140,16 +153,8 @@ def play_game(gesture_list):
     game.get_prediction()
     game.classify_output()
     print(f"The machine predicted that the user gesture was {game.user_prediction}")
-    winner = game.get_winner(game.computer_choice, game.user_choice, game.winner)
-    if winner == "user":
-      computer_lives -= 1
-      print(f"The computer now has {computer_lives} lives left.")
-    elif winner == "computer":
-      user_lives -=1
-      print(f"The user now has {user_lives} lives left.")
+    game.remaining_lives()
     round_number += 1
-    if computer_lives == 0 or user_lives == 0:
-      print(game.spacer, f"\n ****** GAME OVER! The {winner} wins the game! ******", game.spacer, "\n")
   # After the loop release the cap object
   game.cap.release()
   # Destroy all the windows
