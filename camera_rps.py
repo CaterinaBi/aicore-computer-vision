@@ -2,7 +2,9 @@ import cv2
 from keras.models import load_model
 import numpy as np
 import random
-'''
+
+class Game:
+  '''
     A game of Rock, Paper, Scissors in which the user plays against the computer.
     The user inputs their chosen gesture using the camera.
     The computer chooses its move randomly from a pre-determined list.
@@ -43,7 +45,6 @@ import random
     counter_1(), counter_2()
         Slow down the machine to make the application accessible for the user.
     '''
-class Game:
   def __init__(self):
     # model, video and data attributes
     self.model = load_model('keras_model.h5')
@@ -62,14 +63,22 @@ class Game:
     computer_choice = random.choice(gesture_list)
     return computer_choice
 
-  def get_prediction(self):
+  def get_camera(self):
     ret, frame = self.cap.read()
     resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
     image_np = np.array(resized_frame)
     normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
-    self.data[0] = normalized_image
-    prediction = self.model.predict(self.data)
     cv2.imshow('frame', frame)
+    return normalized_image
+    
+  def get_prediction(self):
+    # ret, frame = self.cap.read()
+    # resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
+    # image_np = np.array(resized_frame)
+    # normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
+    self.data[0] = self.get_camera()
+    prediction = self.model.predict(self.data)
+    # cv2.imshow('frame', frame)
     return prediction
   
   def classify_output(self):
@@ -127,7 +136,7 @@ class Game:
     if self.computer_lives == 0 or self.user_lives == 0:
       print(self.spacer, f"\n ******** GAME OVER! The {winner} wins the game! ********", self.spacer, "\n")
 
-  def counter_1(self):
+  def countdown_counter(self):
     countdown = 3
     print("\nPrepare to show me your chosen gesture in...")
     while countdown > 0:
@@ -135,7 +144,7 @@ class Game:
       cv2.waitKey(1000)
       countdown -= 1
     print('\nShow your hand NOW!')
-    self.counter_2()
+    # self.counter_2()
 
   def counter_2(self):
     counter = 2
@@ -149,10 +158,13 @@ def play_game():
   while game.computer_lives >= 1 and game.user_lives >= 1:
     print(game.spacer, f"\n ******************** ROUND NUMBER {game.round_number} ********************", game.spacer)
     print("\nPress 'c' to continue, or 'q' to quit.")
+    game.get_camera()
+    game.countdown_counter()
     game.get_prediction()
-    game.get_computer_choice()
-    game.counter_1()
     game.count_lives()
+    # game.get_prediction()
+    # game.get_computer_choice()
+    # game.count_lives()
     game.round_number += 1
     # Press q to close the window
     if cv2.waitKey(1) & 0xFF == ord('q'):
