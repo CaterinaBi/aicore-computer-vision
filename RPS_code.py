@@ -90,6 +90,7 @@ class Game:
         prediction = self.get_prediction()
         choice_probability = {'Rock': prediction[0,1], 'Paper': prediction[0,2], 'Scissors': prediction[0,3]}
         self.user_prediction = max(choice_probability, key=choice_probability.get)
+        print(f"The machine predicted that the user gesture was {self.user_prediction}")
         return self.user_prediction
 
     # determines winner
@@ -146,13 +147,13 @@ def play_game(gesture_list):
   round_number = 1
   game = Game(gesture_list)
   while game.computer_lives >= 1 and game.user_lives >= 1:
-    game.get_computer_choice(game.computer_choice)
+    # game.get_computer_choice(game.computer_choice)
     game.get_camera()
     print(game.spacer, f"\n ************** ROUND NUMBER {round_number} **************", game.spacer)
     game.countdown_counter()
-    game.get_prediction()
-    game.classify_output()
-    print(f"The machine predicted that the user gesture was {game.user_prediction}")
+    # game.get_prediction()
+    # game.classify_output()
+    # user_prediction
     game.remaining_lives()
     round_number += 1
   # After the loop release the cap object
