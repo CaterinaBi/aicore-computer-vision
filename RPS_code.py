@@ -5,6 +5,47 @@ import random
 import time
 
 class Game:
+    '''
+    A game of Rock, Paper, Scissors in which the user plays against the computer.
+    The user inputs their chosen gesture using the camera.
+    The computer chooses its move randomly from a pre-determined list.
+
+    Attributes:
+    ----------
+    model: load_model('keras_model.h5')
+        Loads computer vision model used in the application.
+    cap: cv2.VideoCapture(0)
+        Video capture constructor for opencv.
+    data: array of tuples
+        The model's probabilities for each element of gesture_list.
+    user: str
+        Attributes the name "user" to the user.
+    computer: str 
+        Attributes the name "computer" to the computer.
+    round_number: int
+        Used to calculate the round number. Starts at 1 by default.
+    computer_lives: int
+        Number of lives left for the computer. Fixed at 3 by default.
+    user_lives: int
+        Number of lives left for the user. Fixed at 3 by default.
+    spacer: str
+        String that prints out a separator to make the application's output clearer.
+
+    Methods:
+    -------
+    get_computer_choice()
+        Gets the computer's input randomly from gesture_list.
+    get_prediction()
+        Understands the user's input using probability.
+    classify_output()
+        Uses the list of probabilities from get_prediction() to determine the image inputted in the camera.
+    get_winner()
+        Returns the name of the winner.
+    count_lives()
+        Keep track of the number of remaining lives for each user.
+    counter_1(), counter_2()
+        Slow down the machine to make the application accessible for the user.
+    '''
     def __init__(self, gesture_list):
         self.computer_choice = random.choice(gesture_list)
 
