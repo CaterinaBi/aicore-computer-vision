@@ -33,18 +33,22 @@ class Game:
 
     Methods:
     -------
+    countdown_counter())
+        Slows down the machine; asks the user to prepare to show their hand.
+    counter_spacer()
+        Slows down the program to make the application accessible for the user.
     get_computer_choice()
         Gets the computer's input randomly from gesture_list.
+    get_camera()
+        Turns on the camera to be used to play.
     get_prediction()
         Understands the user's input using probability.
     classify_output()
         Uses the list of probabilities from get_prediction() to determine the image inputted in the camera.
     get_winner()
         Returns the name of the winner.
-    count_lives()
+    lives_counter()
         Keep track of the number of remaining lives for each user.
-    counter_1(), counter_2()
-        Slow down the machine to make the application accessible for the user.
     '''
     def __init__(self, gesture_list):
         self.computer_choice = random.choice(gesture_list)
@@ -54,17 +58,10 @@ class Game:
         self.cap = cv2.VideoCapture(0)
         self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
-        # font to be used in text messages
-        self.font = cv2.FONT_HERSHEY_SIMPLEX
-        # messages to be displayed
-        self.intro_message = "WELCOME TO THE GAME OF ROCK, PAPER, SCISSORS!"
-        self.instruction_message = "Press 'c' to continue, or 'q' to quit."
-
         self.user_choice = self.get_prediction()
         self.user = "user"
         self.computer = "computer"
         self.winner = str
-        self.seconds = 0
 
         self.computer_lives = 3
         self.user_lives = 3
@@ -80,9 +77,8 @@ class Game:
             cv2.waitKey(1000)
             countdown -= 1
         print('\nShow your hand NOW!')
-        # cv2.waitKey(1000)
     
-    def counter_2(self):
+    def counter_spacer(self):
         counter = 2
         while counter > 0:
             cv2.waitKey(1000)
@@ -90,7 +86,6 @@ class Game:
             counter -= 1
     
     def get_computer_choice(self, computer_choice):
-        # print(f"The computer choice is {computer_choice}")
         return computer_choice
 
     def get_camera(self):
@@ -102,33 +97,21 @@ class Game:
         return normalized_image
     
     def get_prediction(self):
-        # ret, frame = self.cap.read()
-        # resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
-        # image_np = np.array(resized_frame)
-        # normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
         self.data[0] = self.get_camera()
         prediction = self.model.predict(self.data)
-        # cv2.imshow('frame', frame)
         return prediction
     
-    # gets gesture out of prediction
     def classify_output(self):
-        """
-        Uses the list of probabilities output from get_prediction
-        to determine the image inputted in the camera.
-        """
         prediction = self.get_prediction()
         choice_probability = {'Rock': prediction[0,1], 'Paper': prediction[0,2], 'Scissors': prediction[0,3]}
         self.user_prediction = max(choice_probability, key=choice_probability.get)
-        # self.counter_2()
         print(f"The machine predicted that the user gesture was {self.user_prediction}")
         return self.user_prediction
 
-    # determines winner
     def get_winner(self, computer_choice, user_choice, winner):
         computer_choice = self.get_computer_choice(computer_choice)
         user_choice = self.classify_output()
-        self.counter_2()
+        self.counter_spacer()
         if computer_choice == user_choice:
             print(f"\nThe computer too chose {computer_choice}. No one wins this round!")
         elif computer_choice == "Rock":
@@ -154,7 +137,7 @@ class Game:
                 print(f"\nThe computer chose {computer_choice}. The user wins this round!")
         return winner
 
-    def remaining_lives(self):
+    def lives_counter(self):
         winner = self.get_winner(self.computer_choice, self.user_choice, self.winner)
         if winner == "user":
             self.computer_lives -= 1
@@ -162,7 +145,7 @@ class Game:
         elif winner == "computer":
             self.user_lives -=1
             print(f"The user now has {self.user_lives} lives left.")
-        self.counter_2()
+        self.counter_spacer()
         if self.computer_lives == 0 or self.user_lives == 0:
             print(self.spacer, f"\n ****** GAME OVER! The {winner} wins the game! ******", self.spacer, "\n")
 
@@ -170,15 +153,11 @@ def play_game(gesture_list):
   round_number = 1
   game = Game(gesture_list)
   while game.computer_lives >= 1 and game.user_lives >= 1:
-    # game.get_computer_choice(game.computer_choice)
     game.get_camera()
     print(game.spacer, f"\n ************** ROUND NUMBER {round_number} **************", game.spacer)
     game.countdown_counter()
-    game.counter_2()
-    # game.get_prediction()
-    # game.classify_output()
-    # user_prediction
-    game.remaining_lives()
+    game.counter_spacer()
+    game.lives_counter()
     round_number += 1
   # After the loop release the cap object
   game.cap.release()
