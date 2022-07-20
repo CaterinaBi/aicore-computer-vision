@@ -2,6 +2,7 @@ import cv2
 from keras.models import load_model
 import numpy as np
 import random
+import time
 
 class Game:
     '''
@@ -89,11 +90,15 @@ class Game:
         return computer_choice
 
     def get_camera(self):
-        ret, frame = self.cap.read()
-        resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
-        image_np = np.array(resized_frame)
-        normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
-        cv2.imshow('frame', frame)
+        end_time = time.time() + 5
+        while time.time() < end_time:
+            ret, frame = self.cap.read()
+            resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
+            image_np = np.array(resized_frame)
+            normalized_image = (image_np.astype(np.float32) / 127.0) - 1 # Normalize the image
+            cv2.imshow('frame', frame)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
         return normalized_image
     
     def get_prediction(self):
@@ -153,8 +158,6 @@ def play_game(gesture_list):
   round_number = 1
   game = Game(gesture_list)
   while game.computer_lives >= 1 and game.user_lives >= 1:
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
     game.get_camera()
     print(game.spacer, f"\n ************** ROUND NUMBER {round_number} **************", game.spacer)
     game.countdown_counter()
