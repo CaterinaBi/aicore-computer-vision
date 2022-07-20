@@ -153,14 +153,14 @@ def play_game(gesture_list):
   round_number = 1
   game = Game(gesture_list)
   while game.computer_lives >= 1 and game.user_lives >= 1:
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
     game.get_camera()
     print(game.spacer, f"\n ************** ROUND NUMBER {round_number} **************", game.spacer)
     game.countdown_counter()
     game.counter_spacer()
     game.lives_counter()
     round_number += 1
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
   # After the loop release the cap object
   game.cap.release()
   # Destroy all the windows
