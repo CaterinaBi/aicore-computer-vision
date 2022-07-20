@@ -50,7 +50,7 @@ class Game:
         Keep track of the number of remaining lives for each user.
     '''
     def __init__(self, gesture_list):
-        self.computer_choice = random.choice(gesture_list)
+        self.computer_choice = str
 
         # model, video and data attributes
         self.model = load_model('keras_model.h5')
@@ -85,6 +85,7 @@ class Game:
             counter -= 1
     
     def get_computer_choice(self, computer_choice):
+        computer_choice = random.choice(gesture_list)
         return computer_choice
 
     def get_camera(self):
@@ -158,6 +159,8 @@ def play_game(gesture_list):
     game.counter_spacer()
     game.lives_counter()
     round_number += 1
+    if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
   # After the loop release the cap object
   game.cap.release()
   # Destroy all the windows
