@@ -174,6 +174,8 @@ The method `get_winner()` returns the name of the winner.
 
 # Creation of the camera version
 
+The camera version of the application gets the user choice using a webcam - the user is prompted to show a hand gesture to the camera, and the machine utilises the previously-created ML model to guess the gesture and play the game accordingly.
+
 ## From `get_user_gesture()` to `get_prediction()`
 
 ## Additional methods and their fonctionalities
@@ -181,3 +183,5 @@ The method `get_winner()` returns the name of the winner.
 ## Improvements in the overall structure
 
 # Bonus features
+
+I shall be posting a video presentation of the project on my [YouTube channel](https://www.youtube.com/channel/UCSV7T-Axt_hqe6rV_7T-KUg/videos) shortly.
