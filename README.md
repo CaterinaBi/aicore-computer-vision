@@ -174,7 +174,7 @@ The method `get_winner()` returns the name of the winner.
 
 # Creation of the camera version
 
-The camera version of the application gets the user choice using a webcam. The user is thus prompted to show a hand gesture to the camera, and the machine utilises the previously-created ML model to guess the gesture and play the game accordingly.
+The camera version of the application gets the user choice using a webcam. The user is thus prompted to show a hand gesture to the camera, and the machine utilises `keras_model.h5` to guess the gesture and play the game accordingly.
 
 ## From `get_user_choice()` to `get_prediction()`
 
@@ -184,6 +184,10 @@ In the manual version of the application, `get_user_choice` was a very simple me
 def get_user_choice(self, user_choice):
     return user_choice
 ```
+The camera version is more complex and features three different methods that replace `get_user_choice()`:
+- `get_camera()`, which turns on the camera used to play;
+- `get_prediction()`, which understands the user's input using `keras_model.h5` and probability;
+- `classify_output`, which uses the list of probabilities from `get_prediction() to determine the image inputted in the camera.
 
 ## Additional methods and their fonctionalities
 
