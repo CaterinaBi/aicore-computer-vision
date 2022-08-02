@@ -51,24 +51,29 @@ class Game:
         Keep track of the number of remaining lives for each user.
     '''
     def __init__(self, gesture_list):
-        self.computer_choice = str
 
         # model, video and data attributes
         self.model = load_model('keras_model.h5')
         self.cap = cv2.VideoCapture(0)
         self.data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
+        # choices
+        self.computer_choice = str
         self.user_choice = self.get_prediction()
+
+        # user-related attributes
         self.user = "user"
         self.computer = "computer"
         self.winner = str
 
+        # pre-defined number of lives
         self.computer_lives = 3
         self.user_lives = 3
 
         # layout miscellaneous prints
         self.spacer = "\n --------------------------------------------------------"
 
+    # counters to slow down the program
     def countdown_counter(self):
         countdown = 3
         print("\nPrepare to show me your chosen gesture in...")
@@ -85,6 +90,7 @@ class Game:
             print("...")
             counter -= 1
     
+    # methods to get user choices
     def get_computer_choice(self, computer_choice):
         computer_choice = random.choice(gesture_list)
         return computer_choice
@@ -101,6 +107,7 @@ class Game:
                 break
         return normalized_image
     
+    # methods to understand user choice
     def get_prediction(self):
         self.data[0] = self.get_camera()
         prediction = self.model.predict(self.data)
@@ -113,6 +120,7 @@ class Game:
         print(f"The machine predicted that the user gesture was {self.user_prediction}")
         return self.user_prediction
 
+    # method to determine winner
     def get_winner(self, computer_choice, user_choice, winner):
         computer_choice = self.get_computer_choice(computer_choice)
         user_choice = self.classify_output()
@@ -142,14 +150,21 @@ class Game:
                 print(f"\nThe computer chose {computer_choice}. The user wins this round!")
         return winner
 
+    # lives counter
     def lives_counter(self):
         winner = self.get_winner(self.computer_choice, self.user_choice, self.winner)
         if winner == "user":
             self.computer_lives -= 1
-            print(f"The computer now has {self.computer_lives} lives left.")
+            if self.computer_lives == 1:
+                print(f"The computer now has {self.computer_lives} life left.")
+            else:
+                print(f"The computer now has {self.computer_lives} lives left.")
         elif winner == "computer":
             self.user_lives -=1
-            print(f"The user now has {self.user_lives} lives left.")
+            if self.user_lives == 1:
+                print(f"The user now has {self.user_lives} life left.")
+            else:
+                print(f"The user now has {self.user_lives} lives left.")
         self.counter_spacer()
         if self.computer_lives == 0 or self.user_lives == 0:
             print(self.spacer, f"\n ****** GAME OVER! The {winner} wins the game! ******", self.spacer, "\n")
