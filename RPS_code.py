@@ -165,7 +165,6 @@ class Game:
                 print(f"The user now has {self.user_lives} life left.")
             else:
                 print(f"The user now has {self.user_lives} lives left.")
-        # self.counter_spacer()
         if self.computer_lives == 0 or self.user_lives == 0:
             print(self.spacer, f"\n ****** GAME OVER! The {winner} wins the game! ******", self.spacer, "\n")
 
