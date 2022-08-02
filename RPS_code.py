@@ -50,7 +50,7 @@ class Game:
     lives_counter()
         Keep track of the number of remaining lives for each user.
     '''
-    def __init__(self, gesture_list):
+    def __init__(self):
 
         # model, video and data attributes
         self.model = load_model('keras_model.h5')
@@ -96,7 +96,7 @@ class Game:
         return computer_choice
 
     def get_camera(self):
-        end_time = time.time() + 5
+        end_time = time.time() + 1@
         while time.time() < end_time:
             ret, frame = self.cap.read()
             resized_frame = cv2.resize(frame, (224, 224), interpolation = cv2.INTER_AREA)
@@ -165,13 +165,13 @@ class Game:
                 print(f"The user now has {self.user_lives} life left.")
             else:
                 print(f"The user now has {self.user_lives} lives left.")
-        self.counter_spacer()
+        # self.counter_spacer()
         if self.computer_lives == 0 or self.user_lives == 0:
             print(self.spacer, f"\n ****** GAME OVER! The {winner} wins the game! ******", self.spacer, "\n")
 
-def play_game(gesture_list):
+def play_game():
   round_number = 1
-  game = Game(gesture_list)
+  game = Game()
   while game.computer_lives >= 1 and game.user_lives >= 1:
     game.get_camera()
     print(game.spacer, f"\n ************** ROUND NUMBER {round_number} **************", game.spacer)
@@ -186,5 +186,5 @@ def play_game(gesture_list):
 
 if __name__ == '__main__':
   gesture_list = ["Rock", "Paper", "Scissors"]
-  play_game(gesture_list)
+  play_game()
 # %%
