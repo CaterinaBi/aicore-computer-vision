@@ -191,6 +191,10 @@ The camera version is more complex and features three different methods that rep
 
 ## Additional methods and their fonctionalities
 
+The execution of the methods above is further controlled using two timer methods: `countdown_counter()` and `counter_spacer()`. The former slows down the machine to make the programme user-friendly *and* asks the user to prepare to show their hand, while the latter merely slows down the programme and prints two rows of full stops when needed.
+
+![This image shows a test performed to check the programme's performance](images/camera_version.png)  
+
 ## Improvements in the overall structure
 
 # Bonus features
