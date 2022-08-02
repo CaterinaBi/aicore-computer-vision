@@ -174,9 +174,16 @@ The method `get_winner()` returns the name of the winner.
 
 # Creation of the camera version
 
-The camera version of the application gets the user choice using a webcam - the user is prompted to show a hand gesture to the camera, and the machine utilises the previously-created ML model to guess the gesture and play the game accordingly.
+The camera version of the application gets the user choice using a webcam. The user is thus prompted to show a hand gesture to the camera, and the machine utilises the previously-created ML model to guess the gesture and play the game accordingly.
 
 ## From `get_user_gesture()` to `get_prediction()`
+
+In the manual version of the application, `get_user_choice` was a very simple method which utilised the `input()` function of the `user_choice` attribute to obtain a textual prompt from the user, i.e., the chosen gesture:
+
+```python
+def get_user_choice(self, user_choice):
+    return user_choice
+```
 
 ## Additional methods and their fonctionalities
 
