@@ -187,7 +187,7 @@ def get_user_choice(self, user_choice):
 The camera version is more complex and features three different methods that replace `get_user_choice()`:
 - `get_camera()`, which turns on the camera used to play;
 - `get_prediction()`, which understands the user's input using `keras_model.h5` and probability;
-- `classify_output`, which uses the list of probabilities from `get_prediction() to determine the image inputted in the camera.
+- `classify_output`, which uses the list of probabilities from `get_prediction()` to determine the image inputted in the camera.
 
 ## Additional methods and their fonctionalities
 
