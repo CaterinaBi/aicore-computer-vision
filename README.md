@@ -4,7 +4,7 @@
 [![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-no-red.svg)](https://bitbucket.org/lbesson/ansi-colors)
 
-Computer vision project that I am working on as part of my 'AI and Data Engineering' training at [AiCore](https://www.theaicore.com/).
+Computer vision project that I worked on as part of my 'AI and Data Engineering' training at [AiCore](https://www.theaicore.com/).
 
 ![This is an image taken from the AiCore portal](images/portal_png.png)
 
@@ -33,12 +33,12 @@ The project comprises of four milestones organised as follows:
 - creation of a new virtual environment;
 - model testing on the local machine.
 
-3 - MILESTONE 3: Creation of a 'Rock, Paper, Scissors' game.
+3 - MILESTONE 3: Creation of a 'Rock, Paper, Scissors' game (`manual_rps.py`).
 - store the user's and the computer's choices;
 - figure out who won;
 - create a function to simulate the game.
 
-4 - MILESTONE 4: Using the camera to play the game.
+4 - MILESTONE 4: Using the camera to play the game (`camera_rps.py`).
 - set up the camera and test the game;
 - bonus implementations.
 
