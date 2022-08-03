@@ -14,7 +14,7 @@ import random
     computer_choice: str
         The gesture to be played by the computer, picked randomly from gesture_list
     user_choice: str
-        The gesture played by the user (input)
+        The gesture played by the user
     winner: str
         The winner of the match/game
 
