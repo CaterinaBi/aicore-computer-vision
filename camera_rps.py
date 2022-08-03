@@ -29,7 +29,7 @@ class Game:
     user_lives: int
         Number of lives left for the user. Fixed at 3 by default.
     spacer: str
-        String that prints out a separator to make the application's output clearer.
+        String that prints out a separator to make the output clearer.
 
     Methods:
     -------
